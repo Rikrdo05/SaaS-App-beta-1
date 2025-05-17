@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime, date
+from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 import calendar
+import plotly.graph_objects as go
+import plotly.express as px
 
 # Initialize session state for multi-page form
 if 'page' not in st.session_state:
@@ -123,7 +125,7 @@ elif st.session_state.page == 2:
         with seo_cr_cols[4]:
             st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, key="seo_cr_y5") / 100
         
-        # Cost Assumptions Section (NEW)
+        # Cost Assumptions Section
         st.subheader("Cost Assumptions")
         cost_col1, cost_col2 = st.columns(2)
         
@@ -151,90 +153,206 @@ elif st.session_state.page == 2:
 
 # Calculations and Results
 if getattr(st.session_state, 'calculate', False):
-    st.title("📈 Projection Results")
+    # Assign all variables from form data
+    for key, value in st.session_state.form_data.items():
+        globals()[key] = value
     
-    # Display conversion rates table
-    st.subheader("Conversion Rate Assumptions")
-    conversion_df = pd.DataFrame({
-        "Year": [1, 2, 3, 4, 5],
-        "SEM Conversion Rate": [
-            st.session_state.form_data['sem_cr_y1'],
-            st.session_state.form_data['sem_cr_y2'],
-            st.session_state.form_data['sem_cr_y3'],
-            st.session_state.form_data['sem_cr_y4'],
-            st.session_state.form_data['sem_cr_y5']
-        ],
-        "SEO Conversion Rate": [
-            st.session_state.form_data['seo_cr_y1'],
-            st.session_state.form_data['seo_cr_y2'],
-            st.session_state.form_data['seo_cr_y3'],
-            st.session_state.form_data['seo_cr_y4'],
-            st.session_state.form_data['seo_cr_y5']
-        ]
-    })
-    st.dataframe(conversion_df.style.format("{:.2%}"))
+    # Calculate derived variables
+    renewal_rate = 1 - churn_rate
+    LTV = (subscription_price * trial_to_paid) / (1 - renewal_rate)
     
-    # Display cost assumptions table
-    st.subheader("Cost Assumptions")
-    costs_df = pd.DataFrame({
-        "Item": [
-            "SEM CPA",
-            "Affiliate Marketing Pay-per-Subscription",
-            "Credit Card Processing Cost",
-            "Refund Rate",
-            "Chargeback Rate",
-            "Monthly Web Hosting Cost",
-            "Monthly Technology & Software Cost",
-            "Monthly Labor Cost"
-        ],
-        "Value": [
-            f"${st.session_state.form_data['sem_cpa']:.2f}",
-            f"${st.session_state.form_data['affiliate_cpa']:.2f}",
-            f"{st.session_state.form_data['ccp_rate']:.1%}",
-            f"{st.session_state.form_data['refund_rate']:.1%}",
-            f"{st.session_state.form_data['chb_rate']:.1%}",
-            f"${st.session_state.form_data['monthly_web_hosting_cost']:,.0f}",
-            f"${st.session_state.form_data['monthly_techsoft_cost']:,.0f}",
-            f"${st.session_state.form_data['monthly_labor_cost']:,.0f}"
-        ]
-    })
-    st.dataframe(costs_df)
+    # Define growth rate functions
+    def get_sem_growth_rate(month_idx):
+        if month_idx <= 12: return 1 + sem_gr_y1
+        elif month_idx <= 24: return 1 + sem_gr_y2
+        elif month_idx <= 36: return 1 + sem_gr_y3
+        elif month_idx <= 48: return 1 + sem_gr_y4
+        else: return 1 + sem_gr_y5
+
+    def get_sem_cr(month_idx):
+        if month_idx <= 12: return sem_cr_y1
+        elif month_idx <= 24: return sem_cr_y2
+        elif month_idx <= 36: return sem_cr_y3
+        elif month_idx <= 48: return sem_cr_y4
+        else: return sem_cr_y5  
+
+    def get_seo_growth_rate(month_idx):
+        if month_idx <= 12: return 1 + seo_gr_y1
+        elif month_idx <= 24: return 1 + seo_gr_y2
+        elif month_idx <= 36: return 1 + seo_gr_y3
+        elif month_idx <= 48: return 1 + seo_gr_y4
+        else: return 1 + seo_gr_y5
+
+    def get_seo_cr(month_idx):
+        if month_idx <= 12: return seo_cr_y1
+        elif month_idx <= 24: return seo_cr_y2
+        elif month_idx <= 36: return seo_cr_y3
+        elif month_idx <= 48: return seo_cr_y4
+        else: return seo_cr_y5      
     
-    # Generate projections
-    months = [st.session_state.form_data['kick_off_date'] + relativedelta(months=i) for i in range(60)]
-    
+    def get_afmar_growth_rate(month_idx):
+        if month_idx <= 12: return 1 + aff_gr_y1
+        elif month_idx <= 24: return 1 + aff_gr_y2
+        elif month_idx <= 36: return 1 + aff_gr_y3
+        elif month_idx <= 48: return 1 + aff_gr_y4
+        else: return 1 + aff_gr_y5
+
+    # Create DataFrame with calculations
+    months = [kick_off_date + relativedelta(months=i) for i in range(60)]
     df = pd.DataFrame({
         "Month": months,
-        "SEM Traffic": [
-            st.session_state.form_data['sem_traffic_m1'] * (1 + st.session_state.form_data['sem_gr_y1']) ** i if i < 12 else 
-            st.session_state.form_data['sem_traffic_m1'] * (1 + st.session_state.form_data['sem_gr_y2']) ** (i-12) if i < 24 else
-            st.session_state.form_data['sem_traffic_m1'] * (1 + st.session_state.form_data['sem_gr_y3']) ** (i-24) if i < 36 else
-            st.session_state.form_data['sem_traffic_m1'] * (1 + st.session_state.form_data['sem_gr_y4']) ** (i-36) if i < 48 else
-            st.session_state.form_data['sem_traffic_m1'] * (1 + st.session_state.form_data['sem_gr_y5']) ** (i-48) for i in range(60)],
-        
-        "SEO Traffic": [
-            st.session_state.form_data['seo_traffic_m1'] * (1 + st.session_state.form_data['seo_gr_y1']) ** i if i < 12 else 
-            st.session_state.form_data['seo_traffic_m1'] * (1 + st.session_state.form_data['seo_gr_y2']) ** (i-12) if i < 24 else
-            st.session_state.form_data['seo_traffic_m1'] * (1 + st.session_state.form_data['seo_gr_y3']) ** (i-24) if i < 36 else
-            st.session_state.form_data['seo_traffic_m1'] * (1 + st.session_state.form_data['seo_gr_y4']) ** (i-36) if i < 48 else
-            st.session_state.form_data['seo_traffic_m1'] * (1 + st.session_state.form_data['seo_gr_y5']) ** (i-48) for i in range(60)],
-        
-        "Affiliate Subs": [
-            st.session_state.form_data['subs_affiliate_m1'] * (1 + st.session_state.form_data['aff_gr_y1']) ** i if i < 12 else 
-            st.session_state.form_data['subs_affiliate_m1'] * (1 + st.session_state.form_data['aff_gr_y2']) ** (i-12) if i < 24 else
-            st.session_state.form_data['subs_affiliate_m1'] * (1 + st.session_state.form_data['aff_gr_y3']) ** (i-24) if i < 36 else
-            st.session_state.form_data['subs_affiliate_m1'] * (1 + st.session_state.form_data['aff_gr_y4']) ** (i-36) if i < 48 else
-            st.session_state.form_data['subs_affiliate_m1'] * (1 + st.session_state.form_data['aff_gr_y5']) ** (i-48) for i in range(60)],
-        
-        "MRR": [st.session_state.form_data['subscription_price'] * 1000 * (1 - st.session_state.form_data['churn_rate']) ** i for i in range(60)]
+        "Year": [month.year for month in months],
+        "Days Count": [calendar.monthrange(month.year, month.month)[1] for month in months],
+        "Cross-Over Month Trial-To-Paid": free_trial_days / [calendar.monthrange(month.year, month.month)[1] for month in months],
+        "Trial-To-Paid Within Month": 1 - (free_trial_days / [calendar.monthrange(month.year, month.month)[1] for month in months])
     })
     
-    # Show results
-    st.subheader("First Year Projections")
-    st.dataframe(df.head(12).style.format("{:,.0f}"))
+    # Traffic calculations
+    df["SEM - Paid Traffic"] = 0.0
+    df.at[0, "SEM - Paid Traffic"] = sem_traffic_m1
+    for i in range(1, 60):
+        df.at[i, "SEM - Paid Traffic"] = df.at[i-1, "SEM - Paid Traffic"] * get_sem_growth_rate(i)
+
+    df["SEO - Organic Traffic"] = 0.0
+    df.at[0, "SEO - Organic Traffic"] = seo_traffic_m1
+    for i in range(1, 60):
+        df.at[i, "SEO - Organic Traffic"] = df.at[i-1, "SEO - Organic Traffic"] * get_seo_growth_rate(i)
+
+    df["Affiliate Marketing Subscriptions"] = 0.0
+    df.at[0, "Affiliate Marketing Subscriptions"] = subs_affiliate_m1
+    for i in range(1, 60):
+        df.at[i, "Affiliate Marketing Subscriptions"] = df.at[i-1, "Affiliate Marketing Subscriptions"] * get_afmar_growth_rate(i)
     
-    st.subheader("Traffic Growth")
-    st.line_chart(df, x="Month", y=["SEM Traffic", "SEO Traffic", "Affiliate Subs"])
+    # Subscription calculations
+    df["SEM Subscriptions"] = df["SEM - Paid Traffic"] * df.index.map(get_sem_cr)
+    df["SEO Subscriptions"] = df["SEO - Organic Traffic"] * df.index.map(get_seo_cr)
+    df["Total Monthly Subscriptions"] = df["SEM Subscriptions"] + df["SEO Subscriptions"] + df["Affiliate Marketing Subscriptions"]
+
+    # Trial to paid calculations
+    df["Trial To Paid Transactions Count"] = 0.0
+    df.at[0, "Trial To Paid Transactions Count"] = (
+        df.at[0, "Total Monthly Subscriptions"] * 
+        df.at[0, "Trial-To-Paid Within Month"] * 
+        trial_to_paid
+    )
+    for i in range(1, len(df)):
+        df.at[i, "Trial To Paid Transactions Count"] = (
+            (df.at[i, "Total Monthly Subscriptions"] * df.at[i, "Trial-To-Paid Within Month"] * trial_to_paid) +
+            (df.at[i-1, "Total Monthly Subscriptions"] * df.at[i-1, "Cross-Over Month Trial-To-Paid"] * trial_to_paid)
+        )
+
+    # Renewal calculations
+    df["Monthly Renewal Transactions Count"] = 0.0
+    for i in range(1, len(df)):
+        prev_ttp = df.loc[i - 1, "Trial To Paid Transactions Count"]
+        renewal_prev = df.loc[i - 1, "Monthly Renewal Transactions Count"]
+        df.loc[i, "Monthly Renewal Transactions Count"] = (prev_ttp + renewal_prev) * (1 - churn_rate)  
+
+    # Financial calculations
+    df['New Monthly Recurring Revenue MRR'] = df["Trial To Paid Transactions Count"] * subscription_price
+    df['Renewal Recurring Revenue MRR'] = df["Monthly Renewal Transactions Count"] * subscription_price
+    df['Total Monthly Recurring Revenue MRR'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR']
+    df['Chargebacks'] = df['Total Monthly Recurring Revenue MRR'] * chb_rate
+    df['Refunds'] = df['Total Monthly Recurring Revenue MRR'] * refund_rate
+    df['Income'] = df['Total Monthly Recurring Revenue MRR'] - df['Refunds'] - df['Chargebacks']
+    df['Credit Card Processing'] = df['Total Monthly Recurring Revenue MRR'] * ccp_rate
+    df['Web Hosting'] = monthly_web_hosting_cost
+    df['Cost of Goods/Services Sold'] = df['Credit Card Processing'] + df['Web Hosting']
+    df['Gross Income'] = df['Income'] - df['Cost of Goods/Services Sold']
+    df['Labor Cost'] = monthly_labor_cost
+    df['SEM Marketing'] = df["SEM Subscriptions"] * sem_cpa
+    df['Affiliate Marketing'] = df["Affiliate Marketing Subscriptions"] * affiliate_cpa
+    df['Internet Marketing Cost'] = df['Affiliate Marketing'] + df['SEM Marketing']
+    df['Technology & Software'] = monthly_techsoft_cost
+    df['Earnings Before Taxes'] = df['Gross Income'] - df['Labor Cost'] - df['Internet Marketing Cost'] - df['Technology & Software']
     
-    st.subheader("Monthly Recurring Revenue")
-    st.line_chart(df, x="Month", y="MRR")
+    # Cash flow calculations
+    df['Cash Flow Accumulation'] = df['Earnings Before Taxes']
+    for i in range(1, len(df)):
+        prev_cf = df.loc[i - 1, 'Cash Flow Accumulation']
+        current_earnings = df.loc[i, 'Earnings Before Taxes']
+        df.loc[i, 'Cash Flow Accumulation'] = prev_cf + current_earnings
+
+    # LTV and CAC calculations
+    df["Internet Marketing CAC Weighted average"] = ((df["SEM Subscriptions"] * sem_cpa) + 
+                                                   (df["Affiliate Marketing Subscriptions"] * affiliate_cpa)) / \
+                                                  (df["SEM Subscriptions"] + df["Affiliate Marketing Subscriptions"])
+    
+    # Prepare financial data for visualization
+    df_financials = df[[
+        'Month', 'Year', 'Total Monthly Recurring Revenue MRR', 'Chargebacks', 
+        'Refunds', 'Income', 'Credit Card Processing', 'Web Hosting',
+        'Cost of Goods/Services Sold', 'Gross Income', 'Labor Cost',
+        'SEM Marketing', 'Affiliate Marketing', 'Internet Marketing Cost',
+        'Technology & Software', 'Earnings Before Taxes', 'Cash Flow Accumulation'
+    ]].rename(columns={'Total Monthly Recurring Revenue MRR': 'Revenue'})
+    
+    df_financials_by_year = df_financials.groupby("Year", as_index=False).sum(numeric_only=True)
+    
+    # Create and display charts
+    st.title("📈 Financial Projections")
+    
+    # Chart 1: Financial Performance by Year
+    fig1 = go.Figure()
+    fig1.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Revenue"],
+                             mode='lines+markers', name='Revenue'))
+    fig1.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Income"],
+                             mode='lines+markers', name='Income'))
+    fig1.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Gross Income"],
+                             mode='lines+markers', name='Gross Income'))
+    fig1.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Earnings Before Taxes"],
+                             mode='lines+markers', name='Earnings Before Taxes'))
+    fig1.update_layout(
+        title="Financial Performance by Year",
+        xaxis_title="Year",
+        yaxis_title="Amount ($)",
+        plot_bgcolor="white",
+        hovermode="x unified",
+        legend=dict(title=""),
+        yaxis=dict(gridcolor="lightgray")
+    )
+    st.plotly_chart(fig1, use_container_width=True)
+    
+    # Chart 2: Cash Flow Accumulation by Year
+    fig2 = px.bar(
+        df_financials_by_year,
+        x="Year",
+        y="Cash Flow Accumulation",
+        title="Cash Flow Accumulation by Year",
+        labels={"Cash Flow Accumulation": "Cash Flow Accumulation"},
+        text_auto=True,
+        color_discrete_sequence=["skyblue"]
+    )
+    fig2.update_layout(
+        xaxis_title="Year",
+        yaxis_title="Cash Flow Accumulation",
+        bargap=0.3,
+        plot_bgcolor="white",
+        yaxis_gridcolor="lightgray"
+    )
+    st.plotly_chart(fig2, use_container_width=True)
+    
+    # Chart 3: New vs Renewal MRR
+    df_rev_split = df[['Month', 'New Monthly Recurring Revenue MRR', 'Renewal Recurring Revenue MRR']]
+    fig3 = go.Figure()
+    fig3.add_trace(go.Scatter(
+        x=df_rev_split["Month"],
+        y=df_rev_split["New Monthly Recurring Revenue MRR"],
+        mode='lines',
+        name='New MRR',
+        stackgroup='one'
+    ))
+    fig3.add_trace(go.Scatter(
+        x=df_rev_split["Month"],
+        y=df_rev_split["Renewal Recurring Revenue MRR"],
+        mode='lines',
+        name='Renewal MRR',
+        stackgroup='one'
+    ))
+    fig3.update_layout(
+        title="Stacked Line Chart of New vs Renewal MRR",
+        xaxis_title="Month",
+        yaxis_title="MRR",
+        xaxis=dict(type='category')
+    )
+    st.plotly_chart(fig3, use_container_width=True)
