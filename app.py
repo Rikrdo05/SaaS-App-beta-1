@@ -161,8 +161,7 @@ if getattr(st.session_state, 'calculate', False):
     renewal_rate = 1 - churn_rate
     LTV = (subscription_price * trial_to_paid) / (1 - renewal_rate)
 
-# Calculate timeline of months from kick_off_date
-months = [kick_off_date + relativedelta(months=i) for i in range(60)]
+
 
     
     # Define growth rate functions
