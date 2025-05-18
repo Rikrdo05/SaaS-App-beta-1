@@ -196,8 +196,8 @@ if getattr(st.session_state, 'calculate', False):
         elif month_idx <= 36: return 1 + aff_gr_y3
         elif month_idx <= 48: return 1 + aff_gr_y4
         else: return 1 + aff_gr_y5
-
-        # Create DataFrame with calculations
+            
+# Create DataFrame with calculations
 months = [kick_off_date + relativedelta(months=i) for i in range(60)]
 df = pd.DataFrame({
     "Month": months,
@@ -209,22 +209,23 @@ df = pd.DataFrame({
 df["Cross-Over Month Trial-To-Paid"] = df["Days Count"].apply(
     lambda days: min(free_trial_days / days, 1.0)  # Ensure never > 100%
 )
-df["Trial-To-Paid Within Month"] = 1 - df["Cross-Over Month Trial-To-Paid"]    
-    # Traffic calculations
-    df["SEM - Paid Traffic"] = 0.0
-    df.at[0, "SEM - Paid Traffic"] = sem_traffic_m1
-    for i in range(1, 60):
-        df.at[i, "SEM - Paid Traffic"] = df.at[i-1, "SEM - Paid Traffic"] * get_sem_growth_rate(i)
+df["Trial-To-Paid Within Month"] = 1 - df["Cross-Over Month Trial-To-Paid"]
 
-    df["SEO - Organic Traffic"] = 0.0
-    df.at[0, "SEO - Organic Traffic"] = seo_traffic_m1
-    for i in range(1, 60):
-        df.at[i, "SEO - Organic Traffic"] = df.at[i-1, "SEO - Organic Traffic"] * get_seo_growth_rate(i)
+# Traffic calculations
+df["SEM - Paid Traffic"] = 0.0
+df.at[0, "SEM - Paid Traffic"] = sem_traffic_m1
+for i in range(1, 60):
+    df.at[i, "SEM - Paid Traffic"] = df.at[i-1, "SEM - Paid Traffic"] * get_sem_growth_rate(i)
 
-    df["Affiliate Marketing Subscriptions"] = 0.0
-    df.at[0, "Affiliate Marketing Subscriptions"] = subs_affiliate_m1
-    for i in range(1, 60):
-        df.at[i, "Affiliate Marketing Subscriptions"] = df.at[i-1, "Affiliate Marketing Subscriptions"] * get_afmar_growth_rate(i)
+df["SEO - Organic Traffic"] = 0.0
+df.at[0, "SEO - Organic Traffic"] = seo_traffic_m1
+for i in range(1, 60):
+    df.at[i, "SEO - Organic Traffic"] = df.at[i-1, "SEO - Organic Traffic"] * get_seo_growth_rate(i)
+
+df["Affiliate Marketing Subscriptions"] = 0.0
+df.at[0, "Affiliate Marketing Subscriptions"] = subs_affiliate_m1
+for i in range(1, 60):
+    df.at[i, "Affiliate Marketing Subscriptions"] = df.at[i-1, "Affiliate Marketing Subscriptions"] * get_afmar_growth_rate(i)
     
     # Subscription calculations
     df["SEM Subscriptions"] = df["SEM - Paid Traffic"] * df.index.map(get_sem_cr)
