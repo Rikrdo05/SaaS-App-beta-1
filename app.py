@@ -197,16 +197,19 @@ if getattr(st.session_state, 'calculate', False):
         elif month_idx <= 48: return 1 + aff_gr_y4
         else: return 1 + aff_gr_y5
 
-    # Create DataFrame with calculations
-    months = [kick_off_date + relativedelta(months=i) for i in range(60)]
-    df = pd.DataFrame({
-        "Month": months,
-        "Year": [month.year for month in months],
-        "Days Count": [calendar.monthrange(month.year, month.month)[1] for month in months],
-        "Cross-Over Month Trial-To-Paid": free_trial_days / [calendar.monthrange(month.year, month.month)[1] for month in months],
-        "Trial-To-Paid Within Month": 1 - (free_trial_days / [calendar.monthrange(month.year, month.month)[1] for month in months])
-    })
-    
+        # Create DataFrame with calculations
+months = [kick_off_date + relativedelta(months=i) for i in range(60)]
+df = pd.DataFrame({
+    "Month": months,
+    "Year": [month.year for month in months],
+    "Days Count": [calendar.monthrange(month.year, month.month)[1] for month in months]
+})
+
+# Calculate trial days allocation (fixed version)
+df["Cross-Over Month Trial-To-Paid"] = df["Days Count"].apply(
+    lambda days: min(free_trial_days / days, 1.0)  # Ensure never > 100%
+)
+df["Trial-To-Paid Within Month"] = 1 - df["Cross-Over Month Trial-To-Paid"]    
     # Traffic calculations
     df["SEM - Paid Traffic"] = 0.0
     df.at[0, "SEM - Paid Traffic"] = sem_traffic_m1
