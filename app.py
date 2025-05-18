@@ -154,8 +154,48 @@ elif st.session_state.page == 2:
 # Calculations and Results
 if getattr(st.session_state, 'calculate', False):
     # Assign all variables from form data
-    for key, value in st.session_state.form_data.items():
-        globals()[key] = value
+# Assign all variables from form data to local variables
+kick_off_date = st.session_state.form_data['kick_off_date']
+subscription_price = st.session_state.form_data['subscription_price']
+free_trial_days = st.session_state.form_data['free_trial_days']
+trial_to_paid = st.session_state.form_data['trial_to_paid']
+churn_rate = st.session_state.form_data['churn_rate']
+sem_traffic_m1 = st.session_state.form_data['sem_traffic_m1']
+seo_traffic_m1 = st.session_state.form_data['seo_traffic_m1']
+subs_affiliate_m1 = st.session_state.form_data['subs_affiliate_m1']
+sem_gr_y1 = st.session_state.form_data['sem_gr_y1']
+sem_gr_y2 = st.session_state.form_data['sem_gr_y2']
+sem_gr_y3 = st.session_state.form_data['sem_gr_y3']
+sem_gr_y4 = st.session_state.form_data['sem_gr_y4']
+sem_gr_y5 = st.session_state.form_data['sem_gr_y5']
+seo_gr_y1 = st.session_state.form_data['seo_gr_y1']
+seo_gr_y2 = st.session_state.form_data['seo_gr_y2']
+seo_gr_y3 = st.session_state.form_data['seo_gr_y3']
+seo_gr_y4 = st.session_state.form_data['seo_gr_y4']
+seo_gr_y5 = st.session_state.form_data['seo_gr_y5']
+aff_gr_y1 = st.session_state.form_data['aff_gr_y1']
+aff_gr_y2 = st.session_state.form_data['aff_gr_y2']
+aff_gr_y3 = st.session_state.form_data['aff_gr_y3']
+aff_gr_y4 = st.session_state.form_data['aff_gr_y4']
+aff_gr_y5 = st.session_state.form_data['aff_gr_y5']
+sem_cr_y1 = st.session_state.form_data['sem_cr_y1']
+sem_cr_y2 = st.session_state.form_data['sem_cr_y2']
+sem_cr_y3 = st.session_state.form_data['sem_cr_y3']
+sem_cr_y4 = st.session_state.form_data['sem_cr_y4']
+sem_cr_y5 = st.session_state.form_data['sem_cr_y5']
+seo_cr_y1 = st.session_state.form_data['seo_cr_y1']
+seo_cr_y2 = st.session_state.form_data['seo_cr_y2']
+seo_cr_y3 = st.session_state.form_data['seo_cr_y3']
+seo_cr_y4 = st.session_state.form_data['seo_cr_y4']
+seo_cr_y5 = st.session_state.form_data['seo_cr_y5']
+sem_cpa = st.session_state.form_data['sem_cpa']
+affiliate_cpa = st.session_state.form_data['affiliate_cpa']
+ccp_rate = st.session_state.form_data['ccp_rate']
+refund_rate = st.session_state.form_data['refund_rate']
+chb_rate = st.session_state.form_data['chb_rate']
+monthly_web_hosting_cost = st.session_state.form_data['monthly_web_hosting_cost']
+monthly_techsoft_cost = st.session_state.form_data['monthly_techsoft_cost']
+monthly_labor_cost = st.session_state.form_data['monthly_labor_cost']
     
     # Calculate derived variables
     renewal_rate = 1 - churn_rate
