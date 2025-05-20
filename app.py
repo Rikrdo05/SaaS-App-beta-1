@@ -46,12 +46,7 @@ if st.session_state.page == 1:
                 value=100000,  # Default value
                  step=1000,     # Increment/decrement by 1000
                 format="%d")
-        with traffic_col3:
-            st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
-                "Subscriptions from Affiliate Marketing - First Month",  min_value=0, 
-                value=1000,  # Default value
-                 step=1000,     # Increment/decrement by 1000
-                format="%d")
+ 
         
         # Growth Rates Section
         st.subheader("Monthly Growth Rates")
@@ -84,20 +79,7 @@ if st.session_state.page == 1:
         with seo_cols[4]:
             st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, key="seo_y5") / 100
         
-        # Affiliate Growth Rates
-        st.markdown("**Affiliate Subscriptions Growth**")
-        aff_cols = st.columns(5)
-        with aff_cols[0]:
-            st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, key="aff_y1") / 100
-        with aff_cols[1]:
-            st.session_state.form_data['affiliate_subs_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, key="aff_y2") / 100
-        with aff_cols[2]:
-            st.session_state.form_data['affiliate_subs_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, key="aff_y3") / 100
-        with aff_cols[3]:
-            st.session_state.form_data['affiliate_subs_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, key="aff_y4") / 100
-        with aff_cols[4]:
-            st.session_state.form_data['affiliate_subs_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, key="aff_y5") / 100
-
+       
         if st.form_submit_button("Next →"):
             st.session_state.page = 2
             st.rerun()
@@ -138,6 +120,34 @@ elif st.session_state.page == 2:
         with seo_cr_cols[4]:
             st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, key="seo_cr_y5") / 100
         
+        # Affiliate Marketing Section
+        st.subheader("Affiliate Marketing Parameters")
+        aff_col1, aff_col2 = st.columns(2)
+        
+        with aff_col1:
+            st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
+                "Subscriptions from Affiliate Marketing - First Month",  
+                min_value=0, 
+                value=1000,
+                step=1000,
+                format="%d"
+            )
+        
+        # Affiliate Growth Rates
+        with aff_col2:
+            st.markdown("**Affiliate Subscriptions Growth**")
+            aff_cols = st.columns(5)
+            with aff_cols[0]:
+                st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, key="aff_y1") / 100
+            with aff_cols[1]:
+                st.session_state.form_data['affiliate_subs_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, key="aff_y2") / 100
+            with aff_cols[2]:
+                st.session_state.form_data['affiliate_subs_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, key="aff_y3") / 100
+            with aff_cols[3]:
+                st.session_state.form_data['affiliate_subs_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, key="aff_y4") / 100
+            with aff_cols[4]:
+                st.session_state.form_data['affiliate_subs_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, key="aff_y5") / 100
+        
         # Cost Assumptions Section
         st.subheader("Cost Assumptions")
         cost_col1, cost_col2 = st.columns(2)
@@ -164,7 +174,7 @@ elif st.session_state.page == 2:
             if st.form_submit_button("Calculate Projections"):
                 st.session_state.calculate = True
                 st.rerun()
-
+                
 # Calculations and Results
 if st.session_state.page == 2 and st.session_state.calculate:
     # Extract all variables from session state
