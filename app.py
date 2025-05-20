@@ -27,8 +27,8 @@ if st.session_state.page == 1:
         
         with col2:
             st.session_state.form_data['free_trial_days'] = st.slider("Free Trial (Days)", 0, 28, 7)
-            st.session_state.form_data['trial_to_paid'] = st.slider("Trial Conversion %", 0.0, 100.0, 25.0) / 100
-            st.session_state.form_data['churn_rate'] = st.slider("Monthly Churn %", 0.0, 30.0, 5.0) / 100
+            st.session_state.form_data['trial_to_paid'] = st.slider("Trial Conversion %", 0, 100, 25) / 100
+            st.session_state.form_data['churn_rate'] = st.slider("Monthly Churn %", 0, 100, 10) / 100
         
         # Traffic Inputs
         st.subheader("Traffic Parameters")
