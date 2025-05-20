@@ -126,7 +126,7 @@ elif st.session_state.page == 2:
         
         with aff_col1:
             st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
-                "Subscriptions from Affiliate Marketing - First Month",  
+                "Affiliate Marketing Subscriptions\nFirst Month",  
                 min_value=0, 
                 value=1000,
                 step=1000,
