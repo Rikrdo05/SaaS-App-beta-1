@@ -22,7 +22,7 @@ if st.session_state.page == 1:
         
         with col1:
             st.session_state.form_data['kick_off_date'] = st.date_input("Web/App Kick-off Date", date(2025,1,1))
-            st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 39.95, format="%.2f")
+            st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0, format="%.2f")
             st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
         
         with col2:
@@ -35,11 +35,11 @@ if st.session_state.page == 1:
         traffic_col1, traffic_col2, traffic_col3 = st.columns(3)
         
         with traffic_col1:
-            st.session_state.form_data['sem_traffic_m1'] = st.number_input("Initial Traffic", 600000)
+            st.session_state.form_data['sem_traffic_m1'] = st.number_input("Initial Traffic", 0)
         with traffic_col2:
-            st.session_state.form_data['seo_traffic_m1'] = st.number_input("Initial SEO Traffic", 400000)
+            st.session_state.form_data['seo_traffic_m1'] = st.number_input("Initial SEO Traffic", 0)
         with traffic_col3:
-            st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input("Subscriptions from Affiliate Marketing", 10000)
+            st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input("Subscriptions from Affiliate Marketing", 0)
         
         # Growth Rates Section
         st.subheader("Monthly Growth Rates")
