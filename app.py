@@ -35,11 +35,23 @@ if st.session_state.page == 1:
         traffic_col1, traffic_col2, traffic_col3 = st.columns(3)
         
         with traffic_col1:
-            st.session_state.form_data['sem_traffic_m1'] = st.number_input("Initial Traffic", 0)
+            st.session_state.form_data['sem_traffic_m1'] = st.number_input(
+                "SEM Traffic - First Month",  min_value=0, 
+                value=100000,  # Default value
+                 step=1000,     # Increment/decrement by 1000
+                format="%d")
         with traffic_col2:
-            st.session_state.form_data['seo_traffic_m1'] = st.number_input("Initial SEO Traffic", 0)
+            st.session_state.form_data['seo_traffic_m1'] = st.number_input(
+                 "SEO Traffic - First Month",  min_value=0, 
+                value=100000,  # Default value
+                 step=1000,     # Increment/decrement by 1000
+                format="%d")
         with traffic_col3:
-            st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input("Subscriptions from Affiliate Marketing", 0)
+            st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
+                "Subscriptions from Affiliate Marketing - First Month",  min_value=0, 
+                value=1000,  # Default value
+                 step=1000,     # Increment/decrement by 1000
+                format="%d")
         
         # Growth Rates Section
         st.subheader("Monthly Growth Rates")
