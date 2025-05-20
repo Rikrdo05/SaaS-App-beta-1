@@ -22,7 +22,7 @@ if st.session_state.page == 1:
         
         with col1:
             st.session_state.form_data['kick_off_date'] = st.date_input("Web/App Kick-off Date", date(2025,1,1))
-            st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0, format="%.2f")
+            st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0.00, format="%.2f")
             st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
         
         with col2:
