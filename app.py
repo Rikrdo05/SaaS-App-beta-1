@@ -119,34 +119,34 @@ elif st.session_state.page == 2:
             st.session_state.form_data['seo_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, key="seo_cr_y4") / 100
         with seo_cr_cols[4]:
             st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, key="seo_cr_y5") / 100
-        
+
         # Affiliate Marketing Section
-        st.subheader("Affiliate Marketing Parameters")
-        aff_col1, aff_col2 = st.columns(2)
+st.subheader("Affiliate Marketing Parameters")
+
+# First Month Subscriptions
+st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
+    "Affiliate Marketing Subscriptions - First Month",  
+    min_value=0, 
+    value=1000,
+    step=1000,
+    format="%d"
+)
+
+# Affiliate Growth Rates
+st.markdown("**Affiliate Subscriptions Growth**")
+aff_cols = st.columns(5)
+with aff_cols[0]:
+    st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, key="aff_y1") / 100
+with aff_cols[1]:
+    st.session_state.form_data['affiliate_subs_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, key="aff_y2") / 100
+with aff_cols[2]:
+    st.session_state.form_data['affiliate_subs_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, key="aff_y3") / 100
+with aff_cols[3]:
+    st.session_state.form_data['affiliate_subs_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, key="aff_y4") / 100
+with aff_cols[4]:
+    st.session_state.form_data['affiliate_subs_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, key="aff_y5") / 100
         
-        with aff_col1:
-            st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
-                "Affiliate Marketing Subscriptions\nFirst Month",  
-                min_value=0, 
-                value=1000,
-                step=1000,
-                format="%d"
-            )
-        
-        # Affiliate Growth Rates
-        with aff_col2:
-            st.markdown("**Affiliate Subscriptions Growth**")
-            aff_cols = st.columns(5)
-            with aff_cols[0]:
-                st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, key="aff_y1") / 100
-            with aff_cols[1]:
-                st.session_state.form_data['affiliate_subs_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, key="aff_y2") / 100
-            with aff_cols[2]:
-                st.session_state.form_data['affiliate_subs_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, key="aff_y3") / 100
-            with aff_cols[3]:
-                st.session_state.form_data['affiliate_subs_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, key="aff_y4") / 100
-            with aff_cols[4]:
-                st.session_state.form_data['affiliate_subs_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, key="aff_y5") / 100
+
         
         # Cost Assumptions Section
         st.subheader("Cost Assumptions")
