@@ -35,9 +35,7 @@ if st.session_state.page == 1:
             month_number = months.index(selected_month) + 1  # Convert to 1-12
             kick_off_date = date(int(selected_year), month_number, 1)
             
-            # Debug output to verify the date object
-            st.write("Debug - Date object created:", kick_off_date)
-            st.write("Debug - Date type:", type(kick_off_date))
+
             
             # Store in session state
             st.session_state.form_data['kick_off_date'] = kick_off_date
