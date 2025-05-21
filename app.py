@@ -12,61 +12,7 @@ if 'form_data' not in st.session_state:
     st.session_state.form_data = {}
     st.session_state.calculate = False
 
-# Add comprehensive JavaScript to prevent Enter key submission at the app level
-st.components.v1.html("""
-<script>
-// Function to completely disable Enter key form submission
-function disableEnterKeySubmission() {
-    document.addEventListener('keydown', function(e) {
-        // Check if the pressed key is Enter (key code 13)
-        if (e.key === 'Enter' || e.keyCode === 13) {
-            // Check if we're in an input field
-            const activeElement = document.activeElement;
-            const isInput = activeElement.tagName === 'INPUT' || 
-                          activeElement.tagName === 'TEXTAREA' || 
-                          activeElement.tagName === 'SELECT' ||
-                          activeElement.isContentEditable;
-            
-            if (isInput) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                return false;
-            }
-        }
-    }, true);
 
-    // Additional protection for all forms
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                return false;
-            }
-        }, true);
-    });
-}
-
-// Run the function when the page loads
-if (document.readyState === 'complete') {
-    disableEnterKeySubmission();
-} else {
-    document.addEventListener('DOMContentLoaded', disableEnterKeySubmission);
-}
-
-// Also protect dynamically added elements
-const observer = new MutationObserver(function(mutations) {
-    disableEnterKeySubmission();
-});
-
-observer.observe(document.body, {
-    childList: true,
-    subtree: true
-});
-</script>
-""", height=0, width=0)
 
 st.title("📊 SaaS Financial Model")
 
