@@ -97,8 +97,8 @@ if st.session_state.page == 1:
         if st.form_submit_button("Next →"):
             st.session_state.page = 2
             st.rerun()
-
- st.components.v1.html("""
+        
+            st.components.v1.html("""
     <script>
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
@@ -108,6 +108,7 @@ if st.session_state.page == 1:
     </script>
     """)
 
+ 
 # Page 2: Conversion Rates and Cost Assumptions
 elif st.session_state.page == 2:
     st.title("📊 SaaS Financial Model - Part 2/2")
@@ -198,7 +199,7 @@ elif st.session_state.page == 2:
                 st.session_state.calculate = True
                 st.rerun()
 
-st.components.v1.html("""
+                st.components.v1.html("""
     <script>
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
@@ -206,7 +207,9 @@ st.components.v1.html("""
         }
     });
     </script>
-    """)
+    """) 
+
+
 
 # Calculations and Results
 if st.session_state.page == 2 and st.session_state.calculate:
