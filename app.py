@@ -21,19 +21,13 @@ if st.session_state.page == 1:
         col1, col2 = st.columns(2)
         
         with col1:
-            # Month selection
-            months = ['January', 'February', 'March', 'April', 'May', 'June',
-                     'July', 'August', 'September', 'October', 'November', 'December']
-            selected_month = st.selectbox("Launch Month", months, index=0)
-            
-            # Year selection
+            # Year selection only
             current_year = date.today().year
             years = list(range(current_year, current_year + 6))  # Next 5 years
             selected_year = st.selectbox("Launch Year", years, index=1)  # Default to next year
             
-            # Create and store the date object (always 1st day of month)
-            month_number = months.index(selected_month) + 1  # Convert to 1-12
-            kick_off_date = date(int(selected_year), month_number, 1)
+            # Create and store the date object (always January 1st of selected year)
+            kick_off_date = date(int(selected_year), 1, 1)  # Fixed to January (month=1)
             
 
             
