@@ -166,16 +166,16 @@ elif st.session_state.page == 2:
         cost_col1, cost_col2 = st.columns(2)
         
         with cost_col1:
-            st.session_state.form_data['sem_cpa'] = st.number_input("SEM CPA ($)", 26.0, format="%.2f")
-            st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Pay-per-Subscription ($)", 11.0, format="%.2f")
-            st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (%)", 6.0, format="%.2f") / 100
-            st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (%)", 1.0, format="%.2f") / 100
+            st.session_state.form_data['sem_cpa'] = st.number_input("SEM CPA ($)",min_value=0.0,value=20.0,step=0.5, format="%.2f")
+            st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Pay-per-Subscription ($)",min_value=0.0,value=11.0,step=0.5, format="%.2f")
+            st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (%)", min_value=0.0,value=10.0,step=0.5,format="%.2f") / 100
+            st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (%)", min_value=0.0,value=5.0,step=0.5, format="%.2f") / 100
             
         with cost_col2:
             st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (%)", 0.5, format="%.2f") / 100
-            st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)", 300)
-            st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)", 1000)
-            st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", 10000)
+            st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)",min_value=0,value=300,step=50)
+            st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)",min_value=0,value=300,step=50)
+            st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)",min_value=0,value=10000,step=1000)
         
         # Navigation buttons
         col1, col2 = st.columns(2)
