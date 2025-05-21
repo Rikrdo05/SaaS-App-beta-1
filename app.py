@@ -29,12 +29,8 @@ if st.session_state.page == 1:
             # Create and store the date object (always January 1st of selected year)
             kick_off_date = date(int(selected_year), 1, 1)  # Fixed to January (month=1)
             
-
-            
             # Store in session state
             st.session_state.form_data['kick_off_date'] = kick_off_date
-
-                
 
             st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
             st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
@@ -97,18 +93,17 @@ if st.session_state.page == 1:
         if st.form_submit_button("Next →"):
             st.session_state.page = 2
             st.rerun()
-        
-            st.components.v1.html("""
-    <script>
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-        }
-    });
-    </script>
-    """)
 
- 
+    st.components.v1.html("""
+        <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+            }
+        });
+        </script>
+        """)
+
 # Page 2: Conversion Rates and Cost Assumptions
 elif st.session_state.page == 2:
     st.title("📊 SaaS Financial Model - Part 2/2")
@@ -145,7 +140,7 @@ elif st.session_state.page == 2:
         with seo_cr_cols[4]:
             st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0,0.5, key="seo_cr_y5") / 100
 
-               # Affiliate Marketing Section
+        # Affiliate Marketing Section
         st.subheader("Affiliate Marketing Parameters")
 
         # First Month Subscriptions
@@ -199,16 +194,15 @@ elif st.session_state.page == 2:
                 st.session_state.calculate = True
                 st.rerun()
 
-                st.components.v1.html("""
-    <script>
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-        }
-    });
-    </script>
-    """) 
-
+    st.components.v1.html("""
+        <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+            }
+        });
+        </script>
+        """)
 
 
 # Calculations and Results
