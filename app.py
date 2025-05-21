@@ -21,20 +21,27 @@ if st.session_state.page == 1:
         col1, col2 = st.columns(2)
         
         with col1:
-            # First get the selected date
+            # Store previous date for comparison
+            if 'prev_date' not in st.session_state:
+                st.session_state.prev_date = date(2025, 1, 1)
+            
+            # Date input widget
             selected_date = st.date_input(
-                "Web/App Kick-off Date (First of Month)", 
-                date(2025,1,1),
-                key="kick_off_date_input"
+                "Web/App Kick-off Date (Must be 1st of Month)", 
+                st.session_state.prev_date
             )
             
-            # Force the date to be the first of the month
+            # Force to first day of month
             first_day_date = date(selected_date.year, selected_date.month, 1)
             st.session_state.form_data['kick_off_date'] = first_day_date
             
-            # Show warning if user didn't select first day
+            # Show warning if user selected a different day
             if selected_date.day != 1:
-                st.warning("Note: Date automatically adjusted to first day of the month")
+                st.warning("Date automatically adjusted to first day of the month")
+                st.session_state.prev_date = first_day_date
+                st.rerun()
+            else:
+                st.session_state.prev_date = selected_date
                 
 
             st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0.00, format="%.2f")
