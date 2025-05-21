@@ -8,11 +8,14 @@ import plotly.express as px
 import textwrap
 
 # Initialize session state
-if 'form_data' not in st.session_state:
+if "page" not in st.session_state:
+    st.session_state.page = "Assumptions"
+
+if "form_data" not in st.session_state:
     st.session_state.form_data = {}
+
+if "calculate" not in st.session_state:
     st.session_state.calculate = False
-
-
 
 st.title("📊 SaaS Financial Model")
 
