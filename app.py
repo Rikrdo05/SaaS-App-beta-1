@@ -7,9 +7,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 import textwrap
 
-# Initialize session state for multi-page form
-if 'page' not in st.session_state:
-    st.session_state.page = 1
+# Initialize session state
+if 'form_data' not in st.session_state:
     st.session_state.form_data = {}
     st.session_state.calculate = False
 
@@ -69,168 +68,150 @@ observer.observe(document.body, {
 </script>
 """, height=0, width=0)
 
-# Page 1: Core Parameters and Traffic Inputs
-if st.session_state.page == 1:
-    st.title("📊 SaaS Financial Model - Part 1/2")
+st.title("📊 SaaS Financial Model")
+
+with st.form("single_page_form", clear_on_submit=False):
+    # Core Parameters - Column 1
+    st.subheader("Core Parameters")
+    col1, col2 = st.columns(2)
     
-    with st.form("part1", clear_on_submit=False):
-        # Core Parameters - Column 1
-        col1, col2 = st.columns(2)
+    with col1:
+        # Year selection only
+        current_year = date.today().year
+        years = list(range(current_year, current_year + 6))  # Next 5 years
+        selected_year = st.selectbox("Launch Year", years, index=1)  # Default to next year
         
-        with col1:
-            # Year selection only
-            current_year = date.today().year
-            years = list(range(current_year, current_year + 6))  # Next 5 years
-            selected_year = st.selectbox("Launch Year", years, index=1)  # Default to next year
-            
-            # Create and store the date object (always January 1st of selected year)
-            kick_off_date = date(int(selected_year), 1, 1)  # Fixed to January (month=1)
-            
-            # Store in session state
-            st.session_state.form_data['kick_off_date'] = kick_off_date
+        # Create and store the date object (always January 1st of selected year)
+        kick_off_date = date(int(selected_year), 1, 1)  # Fixed to January (month=1)
+        
+        # Store in session state
+        st.session_state.form_data['kick_off_date'] = kick_off_date
 
-            st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
-            st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
-        
-        with col2:
-            st.session_state.form_data['free_trial_days'] = st.slider("Free Trial (Days)", 0, 28, 7)
-            st.session_state.form_data['trial_to_paid'] = st.slider("Trial Conversion %", 0, 100, 25) / 100
-            st.session_state.form_data['churn_rate'] = st.slider("Monthly Churn %", 0, 100, 10) / 100
-        
-        # Traffic Inputs
-        st.subheader("Traffic Parameters")
-        traffic_col1, traffic_col2, traffic_col3 = st.columns(3)
-        
-        with traffic_col1:
-            st.session_state.form_data['sem_traffic_m1'] = st.number_input(
-                "SEM Traffic - First Month", min_value=0, 
-                value=100000, step=1000, format="%d")
-        with traffic_col2:
-            st.session_state.form_data['seo_traffic_m1'] = st.number_input(
-                "SEO Traffic - First Month", min_value=0, 
-                value=100000, step=1000, format="%d")
-        
-        # Growth Rates Section
-        st.subheader("Traffic Monthly Growth Rates by Year")
-        
-        # SEM Growth Rates
-        st.markdown("**SEM Web/App Traffic Monthly Growth by Year**")
-        _cols = st.columns(5)
-        with _cols[0]:
-            st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
-        with _cols[1]:
-            st.session_state.form_data['sem_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="_y2") / 100
-        with _cols[2]:
-            st.session_state.form_data['sem_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y3") / 100
-        with _cols[3]:
-            st.session_state.form_data['sem_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y4") / 100
-        with _cols[4]:
-            st.session_state.form_data['sem_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y5") / 100
-        
-        # SEO Growth Rates
-        st.markdown("**SEO - Web/App Traffic Monthly Growth by Year**")
-        seo_cols = st.columns(5)
-        with seo_cols[0]:
-            st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y1") / 100
-        with seo_cols[1]:
-            st.session_state.form_data['seo_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y2") / 100
-        with seo_cols[2]:
-            st.session_state.form_data['seo_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y3") / 100
-        with seo_cols[3]:
-            st.session_state.form_data['seo_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y4") / 100
-        with seo_cols[4]:
-            st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y5") / 100
-        
-        # Navigation button
-        if st.form_submit_button("Next →"):
-            st.session_state.page = 2
-            st.rerun()
-
-# Page 2: Conversion Rates and Cost Assumptions
-elif st.session_state.page == 2:
-    st.title("📊 SaaS Financial Model - Part 2/2")
+        st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
+        st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
     
-    with st.form("part2", clear_on_submit=False):
-        # Conversion Rates Section
-        st.subheader("Conversion Rate Assumptions")
+    with col2:
+        st.session_state.form_data['free_trial_days'] = st.slider("Free Trial (Days)", 0, 28, 7)
+        st.session_state.form_data['trial_to_paid'] = st.slider("Trial Conversion %", 0, 100, 25) / 100
+        st.session_state.form_data['churn_rate'] = st.slider("Monthly Churn %", 0, 100, 10) / 100
+    
+    # Traffic Inputs
+    st.subheader("Traffic Parameters")
+    traffic_col1, traffic_col2, traffic_col3 = st.columns(3)
+    
+    with traffic_col1:
+        st.session_state.form_data['sem_traffic_m1'] = st.number_input(
+            "SEM Traffic - First Month", min_value=0, 
+            value=100000, step=1000, format="%d")
+    with traffic_col2:
+        st.session_state.form_data['seo_traffic_m1'] = st.number_input(
+            "SEO Traffic - First Month", min_value=0, 
+            value=100000, step=1000, format="%d")
+    
+    # Growth Rates Section
+    st.subheader("Traffic Monthly Growth Rates by Year")
+    
+    # SEM Growth Rates
+    st.markdown("**SEM Web/App Traffic Monthly Growth by Year**")
+    _cols = st.columns(5)
+    with _cols[0]:
+        st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
+    with _cols[1]:
+        st.session_state.form_data['sem_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="_y2") / 100
+    with _cols[2]:
+        st.session_state.form_data['sem_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y3") / 100
+    with _cols[3]:
+        st.session_state.form_data['sem_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y4") / 100
+    with _cols[4]:
+        st.session_state.form_data['sem_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y5") / 100
+    
+    # SEO Growth Rates
+    st.markdown("**SEO - Web/App Traffic Monthly Growth by Year**")
+    seo_cols = st.columns(5)
+    with seo_cols[0]:
+        st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y1") / 100
+    with seo_cols[1]:
+        st.session_state.form_data['seo_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y2") / 100
+    with seo_cols[2]:
+        st.session_state.form_data['seo_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y3") / 100
+    with seo_cols[3]:
+        st.session_state.form_data['seo_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y4") / 100
+    with seo_cols[4]:
+        st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y5") / 100
+    
+    # Conversion Rates Section
+    st.subheader("Conversion Rate Assumptions")
+    
+    # SEM Conversion Rates
+    st.markdown("**SEM Conversion Rates**")
+    sem_cr_cols = st.columns(5)
+    with sem_cr_cols[0]:
+        st.session_state.form_data['sem_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="sem_cr_y1") / 100
+    with sem_cr_cols[1]:
+        st.session_state.form_data['sem_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="sem_cr_y2") / 100
+    with sem_cr_cols[2]:
+        st.session_state.form_data['sem_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="sem_cr_y3") / 100
+    with sem_cr_cols[3]:
+        st.session_state.form_data['sem_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="sem_cr_y4") / 100
+    with sem_cr_cols[4]:
+        st.session_state.form_data['sem_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="sem_cr_y5") / 100
+    
+    # SEO Conversion Rates
+    st.markdown("**SEO Conversion Rates**")
+    seo_cr_cols = st.columns(5)
+    with seo_cr_cols[0]:
+        st.session_state.form_data['seo_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="seo_cr_y1") / 100
+    with seo_cr_cols[1]:
+        st.session_state.form_data['seo_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="seo_cr_y2") / 100
+    with seo_cr_cols[2]:
+        st.session_state.form_data['seo_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="seo_cr_y3") / 100
+    with seo_cr_cols[3]:
+        st.session_state.form_data['seo_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="seo_cr_y4") / 100
+    with seo_cr_cols[4]:
+        st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="seo_cr_y5") / 100
+
+    # Affiliate Marketing Section
+    st.subheader("Affiliate Marketing Parameters")
+
+    # First Month Subscriptions
+    st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
+        "Affiliate Marketing Subscriptions - First Month",  
+        min_value=0, value=1000, step=1000, format="%d")
+
+    # Affiliate Growth Rates
+    st.markdown("**Affiliate Subscriptions Growth**")
+    aff_cols = st.columns(5)
+    with aff_cols[0]:
+        st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, 0.5, key="aff_y1") / 100
+    with aff_cols[1]:
+        st.session_state.form_data['affiliate_subs_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, 0.5, key="aff_y2") / 100
+    with aff_cols[2]:
+        st.session_state.form_data['affiliate_subs_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, 0.5, key="aff_y3") / 100
+    with aff_cols[3]:
+        st.session_state.form_data['affiliate_subs_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, 0.5, key="aff_y4") / 100
+    with aff_cols[4]:
+        st.session_state.form_data['affiliate_subs_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, 0.5, key="aff_y5") / 100
+
+    # Cost Assumptions Section
+    st.subheader("Cost Assumptions")
+    cost_col1, cost_col2 = st.columns(2)
+    
+    with cost_col1:
+        st.session_state.form_data['sem_cpa'] = st.number_input("SEM CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
+        st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Pay-per-Subscription ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
+        st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (%)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
+        st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (%)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
         
-        # SEM Conversion Rates
-        st.markdown("**SEM Conversion Rates**")
-        sem_cr_cols = st.columns(5)
-        with sem_cr_cols[0]:
-            st.session_state.form_data['sem_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="sem_cr_y1") / 100
-        with sem_cr_cols[1]:
-            st.session_state.form_data['sem_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="sem_cr_y2") / 100
-        with sem_cr_cols[2]:
-            st.session_state.form_data['sem_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="sem_cr_y3") / 100
-        with sem_cr_cols[3]:
-            st.session_state.form_data['sem_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="sem_cr_y4") / 100
-        with sem_cr_cols[4]:
-            st.session_state.form_data['sem_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="sem_cr_y5") / 100
-        
-        # SEO Conversion Rates
-        st.markdown("**SEO Conversion Rates**")
-        seo_cr_cols = st.columns(5)
-        with seo_cr_cols[0]:
-            st.session_state.form_data['seo_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="seo_cr_y1") / 100
-        with seo_cr_cols[1]:
-            st.session_state.form_data['seo_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="seo_cr_y2") / 100
-        with seo_cr_cols[2]:
-            st.session_state.form_data['seo_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="seo_cr_y3") / 100
-        with seo_cr_cols[3]:
-            st.session_state.form_data['seo_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="seo_cr_y4") / 100
-        with seo_cr_cols[4]:
-            st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="seo_cr_y5") / 100
-
-        # Affiliate Marketing Section
-        st.subheader("Affiliate Marketing Parameters")
-
-        # First Month Subscriptions
-        st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
-            "Affiliate Marketing Subscriptions - First Month",  
-            min_value=0, value=1000, step=1000, format="%d")
-
-        # Affiliate Growth Rates
-        st.markdown("**Affiliate Subscriptions Growth**")
-        aff_cols = st.columns(5)
-        with aff_cols[0]:
-            st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, 0.5, key="aff_y1") / 100
-        with aff_cols[1]:
-            st.session_state.form_data['affiliate_subs_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, 0.5, key="aff_y2") / 100
-        with aff_cols[2]:
-            st.session_state.form_data['affiliate_subs_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, 0.5, key="aff_y3") / 100
-        with aff_cols[3]:
-            st.session_state.form_data['affiliate_subs_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, 0.5, key="aff_y4") / 100
-        with aff_cols[4]:
-            st.session_state.form_data['affiliate_subs_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, 0.5, key="aff_y5") / 100
-
-        # Cost Assumptions Section
-        st.subheader("Cost Assumptions")
-        cost_col1, cost_col2 = st.columns(2)
-        
-        with cost_col1:
-            st.session_state.form_data['sem_cpa'] = st.number_input("SEM CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
-            st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Pay-per-Subscription ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
-            st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (%)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
-            st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (%)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
-            
-        with cost_col2:
-            st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (%)", min_value=0.0, value=0.5, step=0.5, format="%.2f") / 100
-            st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)", min_value=0, value=300, step=50)
-            st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)", min_value=0, value=300, step=50)
-            st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", min_value=0, value=10000, step=1000)
-        
-        # Navigation buttons
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.form_submit_button("← Back"):
-                st.session_state.page = 1
-                st.rerun()
-        with col2:
-            if st.form_submit_button("Calculate Projections"):
-                st.session_state.calculate = True
-                st.rerun()
-
+    with cost_col2:
+        st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (%)", min_value=0.0, value=0.5, step=0.5, format="%.2f") / 100
+        st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)", min_value=0, value=300, step=50)
+        st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)", min_value=0, value=300, step=50)
+        st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", min_value=0, value=10000, step=1000)
+    
+    # Calculate button
+    if st.form_submit_button("Calculate Projections"):
+        st.session_state.calculate = True
+        st.rerun()
 
 # Calculations and Results
 if st.session_state.page == 2 and st.session_state.calculate:
