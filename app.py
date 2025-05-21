@@ -16,7 +16,7 @@ if 'page' not in st.session_state:
 if st.session_state.page == 1:
     st.title("📊 SaaS Financial Model - Part 1/2")
     
-    with st.form("part1"):
+    with st.form("part1", clear_on_submit=False):
         # Core Parameters - Column 1
         col1, col2 = st.columns(2)
         
@@ -102,7 +102,7 @@ if st.session_state.page == 1:
 elif st.session_state.page == 2:
     st.title("📊 SaaS Financial Model - Part 2/2")
     
-    with st.form("part2"):
+    with st.form("part2", clear_on_submit=False):
         # Conversion Rates Section
         st.subheader("Conversion Rate Assumptions")
         
