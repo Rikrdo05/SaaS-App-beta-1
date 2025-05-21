@@ -36,8 +36,7 @@ if st.session_state.page == 1:
             kick_off_date = date(selected_year, month_number, 1)
             st.session_state.form_data['kick_off_date'] = kick_off_date
             
-            # Display the selected date for confirmation
-            st.write(f"**Selected Start Date:** {kick_off_date.strftime('%B 1, %Y')}")
+
                 
 
             st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0.00, format="%.2f")
