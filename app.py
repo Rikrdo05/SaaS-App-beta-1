@@ -63,35 +63,35 @@ if st.session_state.page == 1:
  
         
         # Growth Rates Section
-        st.subheader("Monthly Growth Rates")
+        st.subheader("Traffic Monthly Growth Rates by Year")
         
         # SEM Growth Rates
-        st.markdown("**SEM/Web Traffic Growth**")
+        st.markdown("**SEM Web/App Traffic Monthly Growth by Year**")
         _cols = st.columns(5)
         with _cols[0]:
-            st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, key="_y1") / 100
+            st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0,0.5, key="_y1") / 100
         with _cols[1]:
-            st.session_state.form_data['sem_traffic_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, key="_y2") / 100
+            st.session_state.form_data['sem_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0,0.5, key="_y2") / 100
         with _cols[2]:
-            st.session_state.form_data['sem_traffic_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, key="sem_y3") / 100
+            st.session_state.form_data['sem_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0,0.5, key="sem_y3") / 100
         with _cols[3]:
-            st.session_state.form_data['sem_traffic_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, key="sem_y4") / 100
+            st.session_state.form_data['sem_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0,0.5, key="sem_y4") / 100
         with _cols[4]:
-            st.session_state.form_data['sem_traffic_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, key="sem_y5") / 100
+            st.session_state.form_data['sem_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0,0.5, key="sem_y5") / 100
         
         # SEO Growth Rates
-        st.markdown("**SEO/Web Traffic Growth**")
+        st.markdown("**SEO - Web/App Traffic Monthly Growth by Year**")
         seo_cols = st.columns(5)
         with seo_cols[0]:
-            st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, key="seo_y1") / 100
+            st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0,0.5, key="seo_y1") / 100
         with seo_cols[1]:
-            st.session_state.form_data['seo_traffic_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, key="seo_y2") / 100
+            st.session_state.form_data['seo_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0,0.5, key="seo_y2") / 100
         with seo_cols[2]:
-            st.session_state.form_data['seo_traffic_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, key="seo_y3") / 100
+            st.session_state.form_data['seo_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0,0.5, key="seo_y3") / 100
         with seo_cols[3]:
-            st.session_state.form_data['seo_traffic_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, key="seo_y4") / 100
+            st.session_state.form_data['seo_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0,0.5, key="seo_y4") / 100
         with seo_cols[4]:
-            st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, key="seo_y5") / 100
+            st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0,,0.5, key="seo_y5") / 100
         
        
         if st.form_submit_button("Next →"):
