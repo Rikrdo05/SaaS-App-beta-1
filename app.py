@@ -91,7 +91,7 @@ if st.session_state.page == 1:
         with seo_cols[3]:
             st.session_state.form_data['seo_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0,0.5, key="seo_y4") / 100
         with seo_cols[4]:
-            st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0,,0.5, key="seo_y5") / 100
+            st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0,0.5, key="seo_y5") / 100
         
        
         if st.form_submit_button("Next →"):
