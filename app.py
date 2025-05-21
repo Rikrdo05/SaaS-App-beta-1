@@ -36,8 +36,7 @@ if st.session_state.page == 1:
             if selected_date.day != 1:
                 st.warning("Note: Date automatically adjusted to first day of the month")
                 
-            # Optional: Display the confirmed date
-            st.caption(f"Selected start date: {first_day_date.strftime('%B 1, %Y')}")
+
             st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0.00, format="%.2f")
             st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
         
