@@ -98,6 +98,16 @@ if st.session_state.page == 1:
             st.session_state.page = 2
             st.rerun()
 
+ st.components.v1.html("""
+    <script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
+    </script>
+    """)
+
 # Page 2: Conversion Rates and Cost Assumptions
 elif st.session_state.page == 2:
     st.title("📊 SaaS Financial Model - Part 2/2")
@@ -187,7 +197,17 @@ elif st.session_state.page == 2:
             if st.form_submit_button("Calculate Projections"):
                 st.session_state.calculate = True
                 st.rerun()
-                
+
+st.components.v1.html("""
+    <script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
+    </script>
+    """)
+
 # Calculations and Results
 if st.session_state.page == 2 and st.session_state.calculate:
     # Extract all variables from session state
