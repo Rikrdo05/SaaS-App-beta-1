@@ -27,7 +27,7 @@ if st.session_state.page == 1:
             
             # Date input widget
             selected_date = st.date_input(
-                "Web/App Kick-off Date (Must be 1st of Month)", 
+                "Web/App Kick-off Date (1st day of the month will be automatically taken into our model)", 
                 st.session_state.prev_date
             )
             
