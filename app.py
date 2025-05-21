@@ -21,27 +21,23 @@ if st.session_state.page == 1:
         col1, col2 = st.columns(2)
         
         with col1:
-            # Store previous date for comparison
-            if 'prev_date' not in st.session_state:
-                st.session_state.prev_date = date(2025, 1, 1)
+            # Month selection
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                     'July', 'August', 'September', 'October', 'November', 'December']
+            selected_month = st.selectbox("Launch Month", months, index=0)
+            month_number = months.index(selected_month) + 1
             
-            # Date input widget
-            selected_date = st.date_input(
-                "Web/App Kick-off Date (1st day of the month will be automatically taken into our model)", 
-                st.session_state.prev_date
-            )
+            # Year selection
+            current_year = date.today().year
+            years = list(range(current_year, current_year + 6))  # Next 5 years
+            selected_year = st.selectbox("Launch Year", years, index=1)  # Default to next year
             
-            # Force to first day of month
-            first_day_date = date(selected_date.year, selected_date.month, 1)
-            st.session_state.form_data['kick_off_date'] = first_day_date
+            # Create date object (automatically 1st day of month)
+            kick_off_date = date(selected_year, month_number, 1)
+            st.session_state.form_data['kick_off_date'] = kick_off_date
             
-            # Show warning if user selected a different day
-            if selected_date.day != 1:
-                st.warning("Date automatically adjusted to first day of the month")
-                st.session_state.prev_date = first_day_date
-                st.rerun()
-            else:
-                st.session_state.prev_date = selected_date
+            # Display the selected date for confirmation
+            st.write(f"**Selected Start Date:** {kick_off_date.strftime('%B 1, %Y')}")
                 
 
             st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0.00, format="%.2f")
