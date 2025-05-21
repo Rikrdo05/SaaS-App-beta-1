@@ -22,20 +22,25 @@ if st.session_state.page == 1:
         
         with col1:
             # Month selection
-            months = ['January', 'February', 'March', 'April', 'May', 'June', 
+            months = ['January', 'February', 'March', 'April', 'May', 'June',
                      'July', 'August', 'September', 'October', 'November', 'December']
             selected_month = st.selectbox("Launch Month", months, index=0)
-            month_number = months.index(selected_month) + 1
             
             # Year selection
             current_year = date.today().year
             years = list(range(current_year, current_year + 6))  # Next 5 years
             selected_year = st.selectbox("Launch Year", years, index=1)  # Default to next year
             
-            # Create date object (automatically 1st day of month)
-            kick_off_date = date(selected_year, month_number, 1)
-            st.session_state.form_data['kick_off_date'] = kick_off_date
+            # Create and store the date object (always 1st day of month)
+            month_number = months.index(selected_month) + 1  # Convert to 1-12
+            kick_off_date = date(int(selected_year), month_number, 1)
             
+            # Debug output to verify the date object
+            st.write("Debug - Date object created:", kick_off_date)
+            st.write("Debug - Date type:", type(kick_off_date))
+            
+            # Store in session state
+            st.session_state.form_data['kick_off_date'] = kick_off_date
 
                 
 
