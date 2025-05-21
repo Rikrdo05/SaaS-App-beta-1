@@ -5,6 +5,7 @@ from dateutil.relativedelta import relativedelta
 import calendar
 import plotly.graph_objects as go
 import plotly.express as px
+import textwrap
 
 # Initialize session state for multi-page form
 if 'page' not in st.session_state:
@@ -16,23 +17,19 @@ if 'page' not in st.session_state:
 if st.session_state.page == 1:
     st.title("📊 SaaS Financial Model - Part 1/2")
 
-    # Place this at the top of the page (before the form)
-st.components.v1.html("""
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const inputs = document.querySelectorAll("input, select, textarea");
-        inputs.forEach(input => {
-            input.addEventListener("keydown", function(e) {
-                if (e.key === "Enter") {
-                    e.preventDefault();
-                }
-            });
-        });
-    });
-    </script>
-""", height=0)
+ 
+
 
     with st.form("part1", clear_on_submit=False):
+        st.components.v1.html(textwrap.dedent("""
+        <script>
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+            }
+        });
+        </script>
+    """), height=0)
         # Core Parameters - Column 1
         col1, col2 = st.columns(2)
         
