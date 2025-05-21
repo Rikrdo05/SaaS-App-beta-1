@@ -12,6 +12,24 @@ if 'page' not in st.session_state:
     st.session_state.page = 1
     st.session_state.form_data = {}
     st.session_state.calculate = False
+st.components.v1.html("""
+<script>
+const blockEnter = (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    }
+};
+
+document.addEventListener('keydown', blockEnter, true);
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keydown', blockEnter);
+});
+</script>
+""")
+
+
 
 # Page 1: Core Parameters and Traffic Inputs
 if st.session_state.page == 1:
@@ -21,15 +39,7 @@ if st.session_state.page == 1:
 
 
     with st.form("part1", clear_on_submit=False):
-        st.components.v1.html(textwrap.dedent("""
-        <script>
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-            }
-        });
-        </script>
-    """), height=0)
+        
         # Core Parameters - Column 1
         col1, col2 = st.columns(2)
         
