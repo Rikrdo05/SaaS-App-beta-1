@@ -36,7 +36,7 @@ if st.session_state.page == 1:
 
                 
 
-            st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0.00, format="%.2f")
+            st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
             st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
         
         with col2:
@@ -172,7 +172,7 @@ elif st.session_state.page == 2:
             st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (%)", min_value=0.0,value=5.0,step=0.5, format="%.2f") / 100
             
         with cost_col2:
-            st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (%)", 0.5, format="%.2f") / 100
+            st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (%)",min_value=0.0,value=0.5,step=0.5, format="%.2f") / 100
             st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)",min_value=0,value=300,step=50)
             st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)",min_value=0,value=300,step=50)
             st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)",min_value=0,value=10000,step=1000)
