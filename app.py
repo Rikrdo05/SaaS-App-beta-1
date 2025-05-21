@@ -21,7 +21,23 @@ if st.session_state.page == 1:
         col1, col2 = st.columns(2)
         
         with col1:
-            st.session_state.form_data['kick_off_date'] = st.date_input("Web/App Kick-off Date", date(2025,1,1))
+            # First get the selected date
+            selected_date = st.date_input(
+                "Web/App Kick-off Date (First of Month)", 
+                date(2025,1,1),
+                key="kick_off_date_input"
+            )
+            
+            # Force the date to be the first of the month
+            first_day_date = date(selected_date.year, selected_date.month, 1)
+            st.session_state.form_data['kick_off_date'] = first_day_date
+            
+            # Show warning if user didn't select first day
+            if selected_date.day != 1:
+                st.warning("Note: Date automatically adjusted to first day of the month")
+                
+            # Optional: Display the confirmed date
+            st.caption(f"Selected start date: {first_day_date.strftime('%B 1, %Y')}")
             st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)", 0.00, format="%.2f")
             st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
         
