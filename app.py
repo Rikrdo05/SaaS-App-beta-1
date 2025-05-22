@@ -40,7 +40,7 @@ with st.form("single_page_form", clear_on_submit=False):
 
     
     with col2:
-        st.session_state.form_data['free_trial_days'] = st.number_input("Free Trial (Days)", min_value=0, max_value=28,step 1)
+        st.session_state.form_data['free_trial_days'] = st.number_input("Free Trial (Days)", min_value=0, max_value=28,step=1)
         st.session_state.form_data['trial_to_paid'] = st.slider("Trial Conversion %", 0, 100, 25) / 100
         st.session_state.form_data['churn_rate'] = st.slider("Monthly Churn %", 0, 100, 10) / 100
     
