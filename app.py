@@ -37,7 +37,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['kick_off_date'] = kick_off_date
 
         st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
-        st.session_state.form_data['sem_cost_metric'] = st.selectbox("SEM Cost Metric", ["CPC", "CPA"], index=1)
+
     
     with col2:
         st.session_state.form_data['free_trial_days'] = st.slider("Free Trial (Days)", 0, 28, 7)
