@@ -146,7 +146,26 @@ with st.form("single_page_form", clear_on_submit=False):
     cost_col1, cost_col2 = st.columns(2)
     
     with cost_col1:
-        st.session_state.form_data['sem_cpa'] = st.number_input("SEM CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
+        if st.session_state.form_data['sem_cost_metric'] == "CPA":
+    st.session_state.form_data['sem_cpa'] = st.number_input(
+        "SEM CPA ($)", 
+        min_value=0.0, 
+        value=20.0, 
+        step=0.5, 
+        format="%.2f"
+    )
+    # Ensure CPC is None when CPA is selected
+    st.session_state.form_data['sem_cpc'] = None
+else:  # CPC selected
+    st.session_state.form_data['sem_cpc'] = st.number_input(
+        "SEM CPC ($)", 
+        min_value=0.0, 
+        value=20.0, 
+        step=0.5, 
+        format="%.2f"
+    )
+    # Ensure CPA is None when CPC is selected
+    st.session_state.form_data['sem_cpa'] = None
         st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Pay-per-Subscription ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
         st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (%)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
         st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (%)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
