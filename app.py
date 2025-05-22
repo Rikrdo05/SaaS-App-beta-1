@@ -163,7 +163,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.rerun()
 
 # Calculations and Results
-if st.session_state.page == 2 and st.session_state.calculate:
+if st.session_state.calculate:
     # Extract all variables from session state
     form_data = st.session_state.form_data
     kick_off_date = form_data['kick_off_date']
