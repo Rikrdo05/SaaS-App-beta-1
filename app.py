@@ -534,11 +534,11 @@ if st.session_state.calculate:
             f"{renewal_rate:.1%}",
             f"${LTV:,.2f}",
             f"${sem_roi:,.2f}",
-            f"{sem_roi_percent:.1%}",
+            f"{sem_roi_percent:.2%}",
             f"${affiliate_marketing_roi:,.2f}",
-            f"{affiliate_marketing_roi_percent:.1%}",
-            str(time_to_recover_sem_cac),
-            str(time_to_recover_sem_affiliate_cpa)
+            f"{affiliate_marketing_roi_percent:.2%}",
+            str(time_to_recover_sem_cac:.2f),
+            str(time_to_recover_sem_affiliate_cpa:.2f)
         ]
     }
     metrics_df = pd.DataFrame(metrics_data)
