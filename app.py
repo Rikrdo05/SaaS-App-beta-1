@@ -128,7 +128,7 @@ with st.form("single_page_form", clear_on_submit=False):
         min_value=0, value=1000, step=1000, format="%d")
 
     # Affiliate Growth Rates
-    st.markdown("**Affiliate Subscriptions Growth**")
+    st.markdown("**Monthly Affiliate Marketing Subscriptions Growth Rate**")
     aff_cols = st.columns(5)
     with aff_cols[0]:
         st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, 0.5, key="aff_y1") / 100
