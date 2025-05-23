@@ -449,7 +449,7 @@ if st.session_state.calculate:
     )
     fig.update_traces(
         hovertemplate='$%{y:,.2f}<extra></extra>',
-        
+        texttemplate='$%{y:,.2f}',
         textposition='outside'
     )
     fig.update_layout(
