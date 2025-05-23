@@ -516,10 +516,8 @@ def lookup_payback_period(cac_value):
         yaxis=dict(tickformat="$,.2f")
     )
     st.plotly_chart(fig, use_container_width=True)
-    # Key Metrics Summary Table
+    # Key Metrics Summary Table - ADDED AT THE END
     st.subheader("Key Metrics Summary")
-
-    # Create a DataFrame for the metrics
     metrics_data = {
         "Metric": [
             "Average Renewal Rate (%)",
@@ -540,12 +538,9 @@ def lookup_payback_period(cac_value):
             f"{affiliate_marketing_roi_percent:.1%}",
             str(time_to_recover_sem_cac),
             str(time_to_recover_sem_affiliate_cpa)
-       ]
+        ]
     }
-
     metrics_df = pd.DataFrame(metrics_data)
-
-    # Display the table with some styling
     st.dataframe(
         metrics_df,
         column_config={
