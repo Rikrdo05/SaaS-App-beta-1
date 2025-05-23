@@ -35,15 +35,14 @@ with st.form("single_page_form", clear_on_submit=False):
         
         # Store in session state
         st.session_state.form_data['kick_off_date'] = kick_off_date
-
-        st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
         st.session_state.form_data['free_trial_days'] = st.number_input("Free Trial (Days)", min_value=0, max_value=28,value=7,step=1)
+        st.session_state.form_data['churn_rate'] = st.number_input("Monthly Churn Rate%", min_value=0, max_value=100,value=25,step=5) / 100
 
     
     with col2:
+        st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
+        st.session_state.form_data['trial_to_paid'] = st.number_input("Monthly Trial To Paid Rate %", min_value=0, max_value=100,value=25,step=5) / 100
         
-        st.session_state.form_data['trial_to_paid'] = st.number_input("Trial To Paid Rate %", min_value=0, max_value=100,value=25,step=5) / 100
-        st.session_state.form_data['churn_rate'] = st.number_input("Monthly Churn %", min_value=0, max_value=100,value=25,step=5) / 100
     
     # Traffic Inputs
     st.subheader("Traffic Parameters")
@@ -51,11 +50,11 @@ with st.form("single_page_form", clear_on_submit=False):
     
     with traffic_col1:
         st.session_state.form_data['sem_traffic_m1'] = st.number_input(
-            "SEM Traffic - First Month", min_value=0, 
+            "SEM Traffic (Paid Traffic) - First Month", min_value=0, 
             value=100000, step=1000, format="%d")
     with traffic_col2:
         st.session_state.form_data['seo_traffic_m1'] = st.number_input(
-            "SEO Traffic - First Month", min_value=0, 
+            "SEO Traffic (Organic Traffic) - First Month", min_value=0, 
             value=100000, step=1000, format="%d")
     
     # Growth Rates Section
@@ -90,7 +89,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y5") / 100
     
     # Conversion Rates Section
-    st.subheader("Conversion Rate Assumptions")
+    st.subheader("Conversion Rate Assumptions (Traffic-to-Trial Rate)")
     
     # SEM Conversion Rates
     st.markdown("**SEM Conversion Rates**")
