@@ -516,3 +516,38 @@ if st.session_state.calculate:
         yaxis=dict(tickformat="$,.2f")
     )
     st.plotly_chart(fig, use_container_width=True)
+
+    # Key Metrics Summary Table - ADDED AT THE END
+    st.subheader("Key Metrics Summary")
+    metrics_data = {
+        "Metric": [
+            "Average Renewal Rate (%)",
+            "LTV ($)",
+            "SEM ROI ($)",
+            "SEM ROI (%)",
+            "Affiliate Marketing ROI ($)",
+            "Affiliate Marketing ROI (%)",
+            "Time to Recover SEM CAC (months)",
+            "Time to Recover Affiliate Marketing CAC (months)"
+        ],
+        "Value": [
+            f"{renewal_rate:.1%}",
+            f"${LTV:,.2f}",
+            f"${sem_roi:,.2f}",
+            f"{sem_roi_percent:.1%}",
+            f"${affiliate_marketing_roi:,.2f}",
+            f"{affiliate_marketing_roi_percent:.1%}",
+            str(time_to_recover_sem_cac),
+            str(time_to_recover_sem_affiliate_cpa)
+        ]
+    }
+    metrics_df = pd.DataFrame(metrics_data)
+    st.dataframe(
+        metrics_df,
+        column_config={
+            "Metric": st.column_config.TextColumn("Metric", width="medium"),
+            "Value": st.column_config.TextColumn("Value", width="small")
+        },
+        hide_index=True,
+        use_container_width=True
+    )
