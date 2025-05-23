@@ -444,7 +444,7 @@ if st.session_state.calculate:
         x="Year",
         y="Cash Flow Accumulation",
         labels={"Cash Flow Accumulation": "Cash Flow Accumulation ($)"},
-        text_auto=True,
+        text_auto='.2f',
         color_discrete_sequence=["skyblue"]
     )
     fig.update_layout(
@@ -469,18 +469,21 @@ if st.session_state.calculate:
         y=df_rev_split["New Monthly Recurring Revenue MRR"],
         mode='lines',
         name='New MRR',
-        stackgroup='one'
+        stackgroup='one',
+        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
     ))
     fig.add_trace(go.Scatter(
         x=df_rev_split["Month"],
         y=df_rev_split["Renewal Recurring Revenue MRR"],
         mode='lines',
         name='Renewal MRR',
-        stackgroup='one'
+        stackgroup='one',
+        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
     ))
     fig.update_layout(
         xaxis_title="Month",
         yaxis_title="MRR",
-        xaxis=dict(type='category')
+        xaxis=dict(type='category'),
+        yaxis=dict(tickformat="$,.2f")
     )
     st.plotly_chart(fig, use_container_width=True)
