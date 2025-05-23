@@ -447,6 +447,11 @@ if st.session_state.calculate:
         text_auto='.2f',
         color_discrete_sequence=["skyblue"]
     )
+    fig.update_traces(
+        hovertemplate='$%{y:,.2f}<extra></extra>',
+        texttemplate='$%{text:,.2f}',
+        textposition='outside'
+    )
     fig.update_layout(
         xaxis_title="Year",
         yaxis_title="Cash Flow Accumulation",
