@@ -437,12 +437,13 @@ if st.session_state.calculate:
 
     # Cashflow accumulation chart
     st.subheader("Cash Flow Accumulation by Year")
-    df_cashflow = df_financials.groupby("Year", as_index=False)["Cash Flow Accumulation"].sum()
+    df_cashflow = df_financials.groupby("Year", as_index=False)["Earnings Before Taxes"].sum()
+    df_cashflow["Cash Flow Accumulation"] = df_cashflow["Earnings Before Taxes"].cumsum()
     fig = px.bar(
         df_cashflow,
         x="Year",
         y="Cash Flow Accumulation",
-        labels={"Cash Flow Accumulation": "Cash Flow Accumulation"},
+        labels={"Cash Flow Accumulation": "Cash Flow Accumulation ($)"},
         text_auto=True,
         color_discrete_sequence=["skyblue"]
     )
