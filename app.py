@@ -148,11 +148,11 @@ with st.form("single_page_form", clear_on_submit=False):
     with cost_col1:
         st.session_state.form_data['sem_cpa'] = st.number_input("SEM Cost Per User Acquisition CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
         st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing CPA ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
-        st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (%)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
-        st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (%)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
+        st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (% of Revenue)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
+        st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (% of Revenue)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
         
     with cost_col2:
-        st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (%)", min_value=0.0, value=0.5, step=0.5, format="%.2f") / 100
+        st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (% of Revenue)", min_value=0.0, value=0.5, step=0.5, format="%.2f") / 100
         st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)", min_value=0, value=300, step=50)
         st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)", min_value=0, value=300, step=50)
         st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", min_value=0, value=10000, step=1000)
