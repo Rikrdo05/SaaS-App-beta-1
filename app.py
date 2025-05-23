@@ -146,7 +146,7 @@ with st.form("single_page_form", clear_on_submit=False):
     cost_col1, cost_col2 = st.columns(2)
     
     with cost_col1:
-        st.session_state.form_data['sem_cpa'] = st.number_input("SEM Cost Per User Acquisition CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
+        st.session_state.form_data['sem_cpa'] = st.number_input("SEM Cost Per User Acquisition - CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
         st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing CPA ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
         st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (% of Revenue)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
         st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (% of Revenue)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
@@ -522,11 +522,11 @@ if st.session_state.calculate:
         "Metric": [
             "Average Monthly Renewal Rate (%)",
             "User Life Time Value LTV ($)",
-            "SEM Return of Investment ROI ($)",
+            "SEM Return of Investment - ROI ($)",
             "SEM ROI (%)",
             "Affiliate Marketing ROI ($)",
             "Affiliate Marketing ROI (%)",
-            "Time to Recover SEM Customer Acquisition Cost CAC (months)",
+            "Time to Recover SEM Customer Acquisition Cost - CAC (months)",
             "Time to Recover Affiliate Marketing CAC (months)"
         ],
         "Value": [
