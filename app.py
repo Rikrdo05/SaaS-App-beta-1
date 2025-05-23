@@ -35,7 +35,7 @@ with st.form("single_page_form", clear_on_submit=False):
         
         # Store in session state
         st.session_state.form_data['kick_off_date'] = kick_off_date
-        st.session_state.form_data['free_trial_days'] = st.number_input("Free Trial (Days)", min_value=0, max_value=28,value=7,step=1)
+        st.session_state.form_data['free_trial_days'] = st.number_input("Subscription Free Trial (Days)", min_value=0, max_value=28,value=7,step=1)
         st.session_state.form_data['churn_rate'] = st.number_input("Monthly Churn Rate%", min_value=0, max_value=100,value=25,step=5) / 100
 
     
