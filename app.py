@@ -208,9 +208,13 @@ if st.session_state.calculate:
     monthly_web_hosting_cost = form_data['monthly_web_hosting_cost']
     monthly_techsoft_cost = form_data['monthly_techsoft_cost']
     monthly_labor_cost = form_data['monthly_labor_cost']
-
     renewal_rate = 1 - churn_rate
     LTV = (subscription_price * trial_to_paid) / (1 - renewal_rate)
+    sem_roi=LTV-sem_cpa
+    sem_roi_percent=sem_roi/sem_cpa
+    affiliate_marketing_roi=LTV-affiliate_cpa
+    affiliate_marketing_roi_percent=affiliate_marketing_roi/affiliate_cpa
+    
 
     # First, let's create a function to determine the growth rate based on the month index
     def get_sem_growth_rate(month_idx):
