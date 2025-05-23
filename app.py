@@ -446,8 +446,8 @@ if st.session_state.calculate:
                              mode='lines+markers', name='Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Gross Income"],
                              mode='lines+markers', name='Gross Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
-    fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Earnings (EBITDA)"],
-                             mode='lines+markers', name='Earnings Before Taxes',hovertemplate='$%{y:,.2f}<extra></extra>'))
+    fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Earnings Before Taxes"],
+                             mode='lines+markers', name='Earnings-EBITDA',hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.update_layout(
         xaxis_title="Year",
         yaxis_title="Amount ($)",
