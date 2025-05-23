@@ -377,26 +377,34 @@ if st.session_state.calculate:
     start_month = free_trial_days / 30
     months = [start_month + i for i in range(len(cumulative_ltv))]
     cumulative_ltv["Months"] = months
-
-
-    if LTV < sem_cpa: time_to_recover_sem_cac = "No Pay Back" 
-        else: match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= sem_cpa].head(1)
-            if not match_row.empty:time_to_recover_sem_cac = match_row["Months"].values[0]
-                else:time_to_recover_sem_cac = "No Pay Back"
+    if LTV < sem_cpa: 
+    time_to_recover_sem_cac = "No Pay Back" 
+    else: 
+    match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= sem_cpa].head(1)
+    if not match_row.empty:
+        time_to_recover_sem_cac = match_row["Months"].values[0]
+    else:
+        time_to_recover_sem_cac = "No Pay Back"
         
-    if LTV < affiliate_cpa:time_to_recover_sem_affiliate_cpa = "No Pay Back"
-        else:match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= affiliate_cpa].head(1)
-            if not match_row.empty:time_to_recover_sem_affiliate_cpa = match_row["Months"].values[0]
-                else:time_to_recover_sem_affiliate_cpa = "No Pay Back"
+    if LTV < affiliate_cpa:
+    time_to_recover_sem_affiliate_cpa = "No Pay Back"
+    else:
+    match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= affiliate_cpa].head(1)
+    if not match_row.empty:
+        time_to_recover_sem_affiliate_cpa = match_row["Months"].values[0]
+    else:
+        time_to_recover_sem_affiliate_cpa = "No Pay Back"
     
-    def lookup_payback_period(cac_value):
-        if LTV < cac_value:
-            return "No Pay Back"
-        match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= cac_value].head(1)
-        if not match_row.empty:
-            return match_row["Months"].values[0]
-        else:
-            return "No Pay Back"
+def lookup_payback_period(cac_value):
+    if LTV < cac_value:
+        return "No Pay Back"
+    match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= cac_value].head(1)
+    if not match_row.empty:
+        return match_row["Months"].values[0]
+    else:
+        return "No Pay Back"
+
+
 
     df["time_to_recover_Internet_marketing_cac"] = df["Internet Marketing CAC Weighted average"].apply(lookup_payback_period)
 
