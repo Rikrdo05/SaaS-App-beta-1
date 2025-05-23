@@ -40,7 +40,7 @@ with st.form("single_page_form", clear_on_submit=False):
 
     
     with col2:
-        st.session_state.form_data['subscription_price'] = st.number_input("Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
+        st.session_state.form_data['subscription_price'] = st.number_input("Monthly Subscription Price ($)",min_value=0.0,value=25.5,step=0.5, format="%.2f")
         st.session_state.form_data['trial_to_paid'] = st.number_input("Monthly Trial To Paid Rate %", min_value=0, max_value=100,value=25,step=5) / 100
         
     
