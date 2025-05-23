@@ -400,14 +400,14 @@ if st.session_state.calculate:
         else:
             time_to_recover_sem_affiliate_cpa = "No Pay Back"
     
-def lookup_payback_period(cac_value):
-    if LTV < cac_value:
-        return "No Pay Back"
-    match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= cac_value].head(1)
-    if not match_row.empty:
-        return match_row["Months"].values[0]
-    else:
-        return "No Pay Back"
+    def lookup_payback_period(cac_value):
+        if LTV < cac_value:
+            return "No Pay Back"
+        match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= cac_value].head(1)
+        if not match_row.empty:
+            return match_row["Months"].values[0]
+        else:
+            return "No Pay Back"
 
 
 
