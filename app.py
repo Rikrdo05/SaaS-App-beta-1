@@ -391,13 +391,13 @@ if st.session_state.calculate:
             time_to_recover_sem_cac = "No Pay Back"
         
     if LTV < affiliate_cpa:
-        time_to_recover_sem_affiliate_cpa = 100000
+        time_to_recover_affiliate_cac = 100000
     else:
         match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= affiliate_cpa].head(1)
         if not match_row.empty:
-            time_to_recover_sem_affiliate_cpa = match_row["Months"].values[0]
+            ttime_to_recover_affiliate_cac = match_row["Months"].values[0]
         else:
-            time_to_recover_sem_affiliate_cpa = "No Pay Back"
+            time_to_recover_affiliate_cac = "No Pay Back"
     
     def lookup_payback_period(cac_value):
         if LTV < cac_value:
@@ -537,7 +537,7 @@ if st.session_state.calculate:
             f"${affiliate_marketing_roi:,.2f}",
             f"{affiliate_marketing_roi_percent:.2%}",
             "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
-            "Immediately" if time_to_recover_sem_cac == 0.0 else f"{time_to_recover_sem_affiliate_cpa:,.2f}"
+            "Immediately" if time_to_recover_affiliate_cac == 0.0 else "Not Profitable" if time_to_recover_affiliate_cac>1200 else f"{time_to_recover_affiliate_cac:,.2f}"
         ]
     }
     metrics_df = pd.DataFrame(metrics_data)
