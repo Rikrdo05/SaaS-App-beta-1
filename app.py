@@ -536,7 +536,7 @@ if st.session_state.calculate:
             f"{sem_roi_percent:.2%}",
             f"${affiliate_marketing_roi:,.2f}",
             f"{affiliate_marketing_roi_percent:.2%}",
-            "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if isinstance(time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
+            "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if is time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
             "Immediately" if time_to_recover_sem_cac == 0.0 else f"{time_to_recover_sem_affiliate_cpa:,.2f}"
         ]
     }
