@@ -56,6 +56,10 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['seo_traffic_m1'] = st.number_input(
             "SEO Traffic (Organic Traffic) - First Month", min_value=0, 
             value=100000, step=1000, format="%d")
+    with traffic_col3:
+        st.session_state.form_data['am_traffic_m1'] = st.number_input(
+            "Affiliate Marketing Traffic - First Month", min_value=0, 
+            value=10000, step=1000, format="%d")    
     
     # Growth Rates Section
     st.subheader("Traffic Monthly Growth Rates by Year")
@@ -88,6 +92,20 @@ with st.form("single_page_form", clear_on_submit=False):
     with seo_cols[4]:
         st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y5") / 100
     
+    # Affiliate Marketing Growth Rates
+    st.markdown("**Affiliate Marketing - Web/App Traffic Monthly Growth by Year**")
+    seo_cols = st.columns(5)
+    with seo_cols[0]:
+        st.session_state.form_data['AM_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y1") / 100
+    with seo_cols[1]:
+        st.session_state.form_data['AM_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y2") / 100
+    with seo_cols[2]:
+        st.session_state.form_data['AM_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y3") / 100
+    with seo_cols[3]:
+        st.session_state.form_data['AM_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y4") / 100
+    with seo_cols[4]:
+        st.session_state.form_data['AM_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y5") / 100
+    
     # Conversion Rates Section
     st.subheader("Conversion Rate Assumptions (Traffic-to-Trial Rate)")
     
@@ -119,27 +137,21 @@ with st.form("single_page_form", clear_on_submit=False):
     with seo_cr_cols[4]:
         st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="seo_cr_y5") / 100
 
-    # Affiliate Marketing Section
-    st.subheader("Affiliate Marketing Parameters")
+    # Affiliate Marketing Conversion Rates
+    st.markdown("**Affiliate Marketing Traffic Conversion Rates**")
+    seo_cr_cols = st.columns(5)
+    with seo_cr_cols[0]:
+        st.session_state.form_data['am_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="am_cr_y1") / 100
+    with seo_cr_cols[1]:
+        st.session_state.form_data['am_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="am_cr_y2") / 100
+    with seo_cr_cols[2]:
+        st.session_state.form_data['am_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="am_cr_y3") / 100
+    with seo_cr_cols[3]:
+        st.session_state.form_data['am_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="am_cr_y4") / 100
+    with seo_cr_cols[4]:
+        st.session_state.form_data['am_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="am_cr_y5") / 100
+    
 
-    # First Month Subscriptions
-    st.session_state.form_data['subs_affiliate_marketing_m1'] = st.number_input(
-        "Affiliate Marketing Subscriptions - First Month",  
-        min_value=0, value=1000, step=1000, format="%d")
-
-    # Affiliate Growth Rates
-    st.markdown("**Monthly Affiliate Marketing Subscriptions Growth Rate**")
-    aff_cols = st.columns(5)
-    with aff_cols[0]:
-        st.session_state.form_data['affiliate_subs_gr_y1'] = st.number_input("Year 1", 0.0, 100.0, 2.0, 0.5, key="aff_y1") / 100
-    with aff_cols[1]:
-        st.session_state.form_data['affiliate_subs_gr_y2'] = st.number_input("Year 2", 0.0, 100.0, 2.0, 0.5, key="aff_y2") / 100
-    with aff_cols[2]:
-        st.session_state.form_data['affiliate_subs_gr_y3'] = st.number_input("Year 3", 0.0, 100.0, 2.0, 0.5, key="aff_y3") / 100
-    with aff_cols[3]:
-        st.session_state.form_data['affiliate_subs_gr_y4'] = st.number_input("Year 4", 0.0, 100.0, 2.0, 0.5, key="aff_y4") / 100
-    with aff_cols[4]:
-        st.session_state.form_data['affiliate_subs_gr_y5'] = st.number_input("Year 5", 0.0, 100.0, 2.0, 0.5, key="aff_y5") / 100
 
     # Cost Assumptions Section
     st.subheader("Cost Assumptions")
@@ -173,7 +185,7 @@ if st.session_state.calculate:
     churn_rate = form_data['churn_rate']
     sem_traffic_m1 = form_data['sem_traffic_m1']
     seo_traffic_m1 = form_data['seo_traffic_m1']
-    subs_affiliate_marketing_m1 = form_data['subs_affiliate_marketing_m1']
+    am_traffic_m1 = form_data['am_traffic_m1']
     sem_traffic_gr_y1 = form_data['sem_traffic_gr_y1']
     sem_traffic_gr_y2 = form_data['sem_traffic_gr_y2']
     sem_traffic_gr_y3 = form_data['sem_traffic_gr_y3']
@@ -184,6 +196,11 @@ if st.session_state.calculate:
     seo_traffic_gr_y3 = form_data['seo_traffic_gr_y3']
     seo_traffic_gr_y4 = form_data['seo_traffic_gr_y4']
     seo_traffic_gr_y5 = form_data['seo_traffic_gr_y5']
+    am_traffic_gr_y1 = form_data['am_traffic_gr_y1']
+    am_traffic_gr_y2 = form_data['am_traffic_gr_y2']
+    am_traffic_gr_y3 = form_data['am_traffic_gr_y3']
+    am_traffic_gr_y4 = form_data['am_traffic_gr_y4']
+    am_traffic_gr_y5 = form_data['am_traffic_gr_y5']
     affiliate_subs_gr_y1 = form_data['affiliate_subs_gr_y1']
     affiliate_subs_gr_y2 = form_data['affiliate_subs_gr_y2']
     affiliate_subs_gr_y3 = form_data['affiliate_subs_gr_y3']
@@ -199,6 +216,11 @@ if st.session_state.calculate:
     seo_cr_y3 = form_data['seo_cr_y3']
     seo_cr_y4 = form_data['seo_cr_y4']
     seo_cr_y5 = form_data['seo_cr_y5']
+    am_cr_y1 = form_data['am_cr_y1']
+    am_cr_y2 = form_data['am_cr_y2']
+    am_cr_y3 = form_data['am_cr_y3']
+    am_cr_y4 = form_data['am_cr_y4']
+    am_cr_y5 = form_data['am_cr_y5']
     sem_cpa = form_data['sem_cpa']
     affiliate_cpa = form_data['affiliate_cpa']
     ccp_rate = form_data['ccp_rate']
@@ -263,18 +285,32 @@ if st.session_state.calculate:
             return seo_cr_y4
         else:                  # Year 5
             return seo_cr_y5      
-        
-    def get_afmar_growth_rate(month_idx):
+
+    def get_am_growth_rate(month_idx):
         if month_idx <= 12:  # Year 1
-            return 1 + affiliate_subs_gr_y1
+            return 1 + am_traffic_gr_y1
         elif month_idx <= 24:  # Year 2
-            return 1 + affiliate_subs_gr_y2
+            return 1 + am_traffic_gr_y2
         elif month_idx <= 36:  # Year 3
-            return 1 + affiliate_subs_gr_y3
+            return 1 + am_traffic_gr_y3
         elif month_idx <= 48:  # Year 4
-            return 1 + affiliate_subs_gr_y4
+            return 1 + am_traffic_gr_y4
         else:  # Year 5
-            return 1 + affiliate_subs_gr_y5
+            return 1 + am_traffic_gr_y5
+
+    def get_am_cr(month_idx):
+        if month_idx <= 12:    # Year 1
+            return am_cr_y1
+        elif month_idx <= 24:  # Year 2
+            return am_cr_y2
+        elif month_idx <= 36:  # Year 3
+            return am_cr_y3
+        elif month_idx <= 48:  # Year 4
+            return am_cr_y4
+        else:                  # Year 5
+            return am_cr_y5
+            
+
 
     # Recurring revenue and financials dataframe
     months = [kick_off_date + relativedelta(months=i) for i in range(60)]
@@ -303,17 +339,18 @@ if st.session_state.calculate:
         seo_growth_rate = get_seo_growth_rate(i)
         df.at[i, "SEO - Organic Traffic"] = df.at[i-1, "SEO - Organic Traffic"] * seo_growth_rate
 
-    df["Affiliate Marketing Subscriptions"] = 0.0
-    df.at[0, "Affiliate Marketing Subscriptions"] = subs_affiliate_marketing_m1  # Set first month value (10,000)
+    df["AM - Paid Traffic"] = 0.0
+    df.at[0, "AM - Paid Traffic"] = am_traffic_m1  # Set first month value
 
-    # Calculate subsequent months (with correct variable name)
+    # Calculate subsequent months
     for i in range(1, 60):
-        afmar_growth_rate = get_afmar_growth_rate(i)
-        df.at[i, "Affiliate Marketing Subscriptions"] = df.at[i-1, "Affiliate Marketing Subscriptions"] * afmar_growth_rate
+        am_growth_rate = get_am_growth_rate(i)
+        df.at[i, "AM - Paid Traffic"] = df.at[i-1, "AM - Paid  Traffic"] * am_growth_rate
         
     df["SEM Subscriptions"] = df["SEM - Paid Traffic"] * df.index.map(get_sem_cr)
     df["SEO Subscriptions"] = df["SEO - Organic Traffic"] * df.index.map(get_seo_cr)
-    df["Total Monthly Subscriptions"] = df["SEM Subscriptions"] + df["SEO Subscriptions"] + df["Affiliate Marketing Subscriptions"]
+    df["AM Subscriptions"] = df["AM - Paid  Traffic"] * df.index.map(get_am_cr)
+    df["Total Monthly Subscriptions"] = df["SEM Subscriptions"] + df["SEO Subscriptions"] + df["AM Subscriptions"]
 
     # Initialize the new column
     df["Trial To Paid Transactions Count"] = 0.0
@@ -350,7 +387,7 @@ if st.session_state.calculate:
     df['Gross Income'] = df['Income'] - df['Cost of Goods/Services Sold']
     df['Labor Cost'] = monthly_labor_cost
     df['SEM Marketing'] = df["SEM Subscriptions"] * sem_cpa
-    df['Affiliate Marketing'] = df["Affiliate Marketing Subscriptions"] * affiliate_cpa
+    df['Affiliate Marketing'] = df["AM Subscriptions"] * affiliate_cpa
     df['Internet Marketing Cost'] = df['Affiliate Marketing'] + df['SEM Marketing']
     df['Technology & Software'] = monthly_techsoft_cost
     df['Earnings Before Taxes'] = df['Gross Income'] - df['Labor Cost'] - df['Internet Marketing Cost'] - df['Technology & Software']
