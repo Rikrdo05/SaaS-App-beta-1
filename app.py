@@ -94,16 +94,16 @@ with st.form("single_page_form", clear_on_submit=False):
     
     # Affiliate Marketing Growth Rates
     st.markdown("**Affiliate Marketing - Web/App Traffic Monthly Growth by Year**")
-    seo_cols = st.columns(5)
-    with seo_cols[0]:
+    am_cols = st.columns(5)
+    with am_cols[0]:
         st.session_state.form_data['AM_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y1") / 100
-    with seo_cols[1]:
+    with am_cols[1]:
         st.session_state.form_data['AM_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y2") / 100
-    with seo_cols[2]:
+    with am_cols[2]:
         st.session_state.form_data['AM_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y3") / 100
-    with seo_cols[3]:
+    with am_cols[3]:
         st.session_state.form_data['AM_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y4") / 100
-    with seo_cols[4]:
+    with am_cols[4]:
         st.session_state.form_data['AM_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y5") / 100
     
     # Conversion Rates Section
@@ -139,16 +139,16 @@ with st.form("single_page_form", clear_on_submit=False):
 
     # Affiliate Marketing Conversion Rates
     st.markdown("**Affiliate Marketing Traffic Conversion Rates**")
-    seo_cr_cols = st.columns(5)
-    with seo_cr_cols[0]:
+    am_cr_cols = st.columns(5)
+    with am_cr_cols[0]:
         st.session_state.form_data['am_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="am_cr_y1") / 100
-    with seo_cr_cols[1]:
+    with am_cr_cols[1]:
         st.session_state.form_data['am_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="am_cr_y2") / 100
-    with seo_cr_cols[2]:
+    with am_cr_cols[2]:
         st.session_state.form_data['am_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="am_cr_y3") / 100
-    with seo_cr_cols[3]:
+    with am_cr_cols[3]:
         st.session_state.form_data['am_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="am_cr_y4") / 100
-    with seo_cr_cols[4]:
+    with am_cr_cols[4]:
         st.session_state.form_data['am_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="am_cr_y5") / 100
     
 
