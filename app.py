@@ -92,7 +92,7 @@ with st.form("single_page_form", clear_on_submit=False):
     st.subheader("Conversion Rate Assumptions (Traffic-to-Trial Rate)")
     
     # SEM Conversion Rates
-    st.markdown("**SEM Conversion Rates**")
+    st.markdown("**SEM (Paid Traffic) Conversion Rates**")
     sem_cr_cols = st.columns(5)
     with sem_cr_cols[0]:
         st.session_state.form_data['sem_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="sem_cr_y1") / 100
@@ -106,7 +106,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['sem_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="sem_cr_y5") / 100
     
     # SEO Conversion Rates
-    st.markdown("**SEO Conversion Rates**")
+    st.markdown("**SEO (Organic Traffic) Conversion Rates**")
     seo_cr_cols = st.columns(5)
     with seo_cr_cols[0]:
         st.session_state.form_data['seo_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="seo_cr_y1") / 100
