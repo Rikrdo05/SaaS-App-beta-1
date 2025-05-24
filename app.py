@@ -152,7 +152,6 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['am_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="am_cr_y5") / 100
     
 
-
     # Cost Assumptions Section
     st.subheader("Cost Assumptions")
     cost_col1, cost_col2 = st.columns(2)
@@ -190,11 +189,13 @@ with st.form("single_page_form", clear_on_submit=False):
     with cost_col2:
         st.session_state.form_data['am_cpa'] = st.number_input("Affiliate Cost Per Action - CPA Revenue ($)", min_value=0.0, value=0, step=0.5, format="%.2f")
     
-    # Calculate button
-    submit_button=st.form_submit_button("Calculate Projections")
+    # Calculate button - FIXED VERSION
+    submit_button = st.form_submit_button("Calculate Projections")
     if submit_button:
         st.session_state.calculate = True
         st.rerun()
+
+
 
 # Calculations and Results
 if st.session_state.calculate:
