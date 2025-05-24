@@ -187,7 +187,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['am_ctr'] = st.number_input("Affiliate Click-Trough Rate CTR %", min_value=0.0, value=0.0, step=0.5, format="%.2f") / 100
  
     with AdAF_col2:
-        st.session_state.form_data['am_cpa'] = st.number_input("Affiliate Cost Per Action - CPA Revenue ($)", min_value=0.0, value=0, step=0.5, format="%.2f")
+        st.session_state.form_data['am_cpa'] = st.number_input("Affiliate Cost Per Action - CPA Revenue ($)", min_value=0.0, value=0.0, step=0.5, format="%.2f")
     
     # Calculate button - FIXED VERSION
     if st.form_submit_button("Calculate Projections"):
