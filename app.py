@@ -488,15 +488,15 @@ if st.session_state.calculate:
     st.subheader("Monthly Recurring Revenue MRR Split")
     df_rev_split = df[[
         'Month',
-        'Trial-to-Paid (New Users)',
-        'Recurring Renewals' 
+        'New Monthly Recurring Revenue MRR',
+        'Renewal Recurring Revenue MRR' 
     ]]
     fig = go.Figure()
     fig.add_trace(go.Scatter(
         x=df_rev_split["Month"],
         y=df_rev_split["New Monthly Recurring Revenue MRR"],
         mode='lines',
-        name='New MRR',
+        name='Trial To Paid (New Users Acquired)',
         stackgroup='one',
         hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
     ))
@@ -504,7 +504,7 @@ if st.session_state.calculate:
         x=df_rev_split["Month"],
         y=df_rev_split["Renewal Recurring Revenue MRR"],
         mode='lines',
-        name='Renewal MRR',
+        name='Recurring Renewals',
         stackgroup='one',
         hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
     ))
