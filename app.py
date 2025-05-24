@@ -445,7 +445,7 @@ if st.session_state.calculate:
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Income"],
                              mode='lines+markers', name='Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Gross Income"],
-                             mode='lines+markers', name='Gross Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
+                             mode='lines+markers', name='Gross<br>Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Earnings Before Taxes"],
                              mode='lines+markers', name='Earnings<br>EBITDA',hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.update_layout(
@@ -496,7 +496,7 @@ if st.session_state.calculate:
         x=df_rev_split["Month"],
         y=df_rev_split["New Monthly Recurring Revenue MRR"],
         mode='lines',
-        name='Trial To Paid (New Users Acquired)',
+        name='Trial To Paid<br>(New Users)',
         stackgroup='one',
         hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
     ))
@@ -504,7 +504,7 @@ if st.session_state.calculate:
         x=df_rev_split["Month"],
         y=df_rev_split["Renewal Recurring Revenue MRR"],
         mode='lines',
-        name='Recurring Renewals',
+        name='Recurring<br>Renewals',
         stackgroup='one',
         hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
     ))
