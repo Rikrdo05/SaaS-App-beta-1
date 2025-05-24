@@ -395,7 +395,7 @@ if st.session_state.calculate:
     else:
         match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= affiliate_cpa].head(1)
         if not match_row.empty:
-            ttime_to_recover_affiliate_cac = match_row["Months"].values[0]
+            time_to_recover_affiliate_cac = match_row["Months"].values[0]
         else:
             time_to_recover_affiliate_cac = "No Pay Back"
     
