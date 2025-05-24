@@ -168,6 +168,27 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)", min_value=0, value=300, step=50)
         st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)", min_value=0, value=300, step=50)
         st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", min_value=0, value=10000, step=1000)
+
+    # Other Revenue Sources
+    st.subheader("Other Revenue - Ad Network (e.g, Google AdSense)")
+    cost_col1, cost_col2 = st.columns(2)
+    
+    with cost_col1:
+        st.session_state.form_data['views per visit'] = st.number_input("Page Views Per Visit", min_value=0.0, value=0.0, step=0.5, format="%.2f")
+        st.session_state.form_data['ctr'] = st.number_input("Ad Network Click-Trough Rate CTR %", min_value=0.0, value=0.00, step=0.5, format="%.2f") / 100
+    with cost_col2:
+        st.session_state.form_data['cpm'] = st.number_input("Cost Per Mile/1,000 Impressions - CPM Revenue ($)", min_value=0.0, value=5.0, step=0.5, format="%.2f")
+        st.session_state.form_data['rev_cpc'] = st.number_input("Cost Per Click - CPC Revenue ($)", min_value=0.00, value=0.00, step=0.01, format="%.2f")
+
+    # Other Revenue Sources
+    st.subheader("Other Revenue - Affiliate Marketing")
+    cost_col1, cost_col2 = st.columns(2)
+    
+    with cost_col1:
+        st.session_state.form_data['am_ctr'] = st.number_input("Affiliate Click-Trough Rate CTR %", min_value=0.0, value=0.0, step=0.5, format="%.2f") / 100
+ 
+    with cost_col2:
+        st.session_state.form_data['am_cpa'] = st.number_input("Affiliate Cost Per Action - CPA Revenue ($)", min_value=0.0, value=0, step=0.5, format="%.2f")
     
     # Calculate button
     if st.form_submit_button("Calculate Projections"):
@@ -229,6 +250,12 @@ if st.session_state.calculate:
     monthly_web_hosting_cost = form_data['monthly_web_hosting_cost']
     monthly_techsoft_cost = form_data['monthly_techsoft_cost']
     monthly_labor_cost = form_data['monthly_labor_cost']
+    views_per_visit=form_data['views per visit']
+    cpm=form_data['cpm']
+    ctr=form_data['ctr']
+    cpc_rev=form_data['rev_cpc']
+    am_ctr=form_data['am_ctr']
+    am_cpa=form_data['am_cpa']
     renewal_rate = 1 - churn_rate
     LTV = (subscription_price * trial_to_paid) / (1 - renewal_rate)
     sem_roi=LTV-sem_cpa
@@ -351,6 +378,7 @@ if st.session_state.calculate:
     df["SEO Subscriptions"] = df["SEO - Organic Traffic"] * df.index.map(get_seo_cr)
     df["AM Subscriptions"] = df["AM - Paid  Traffic"] * df.index.map(get_am_cr)
     df["Total Monthly Subscriptions"] = df["SEM Subscriptions"] + df["SEO Subscriptions"] + df["AM Subscriptions"]
+    df["Website Views"]= (df["SEM - Paid Traffic"]+df["SEO - Organic Traffic"]+df["AM - Paid  Traffic"])*views_per_visit
 
     # Initialize the new column
     df["Trial To Paid Transactions Count"] = 0.0
@@ -377,7 +405,9 @@ if st.session_state.calculate:
 
     df['New Monthly Recurring Revenue MRR'] = df["Trial To Paid Transactions Count"] * subscription_price
     df['Renewal Recurring Revenue MRR'] = df["Monthly Renewal Transactions Count"] * subscription_price
-    df['Total Monthly Recurring Revenue MRR'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR']
+    df["Ad Network Revenue"]=(df["Website Views"]*(cpm/1000)) + (df["Website Views"]*ctr*cpc_rev)
+    df['Ad Affiliate Revenue']=df["Website Views"]*am_ctr*am_cpa
+    df['Total Monthly Recurring Revenue MRR'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR'] +df["Ad Network Revenue"]+df['Ad Affiliate Revenue']
     df['Chargebacks'] = df['Total Monthly Recurring Revenue MRR'] * chb_rate
     df['Refunds'] = df['Total Monthly Recurring Revenue MRR'] * refund_rate
     df['Income'] = df['Total Monthly Recurring Revenue MRR'] - df['Refunds'] - df['Chargebacks']
@@ -479,7 +509,8 @@ if st.session_state.calculate:
     df_rev_split = df[[
         'Month',
         'New Monthly Recurring Revenue MRR',
-        'Renewal Recurring Revenue MRR' 
+        'Renewal Recurring Revenue MRR' ,
+        'Ad Network Revenue'
     ]]
     fig = go.Figure()
     fig.add_trace(go.Scatter(
@@ -495,6 +526,22 @@ if st.session_state.calculate:
         y=df_rev_split["Renewal Recurring Revenue MRR"],
         mode='lines',
         name='Recurring<br>Renewals',
+        stackgroup='one',
+        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+    ))
+    fig.add_trace(go.Scatter(
+        x=df_rev_split["Month"],
+        y=df_rev_split["Ad Network Revenue"],
+        mode='lines',
+        name='Ad Network',
+        stackgroup='one',
+        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+    ))
+    fig.add_trace(go.Scatter(
+        x=df_rev_split["Month"],
+        y=df_rev_split["Ad Affiliate Revenue"],
+        mode='lines',
+        name='Ad Affiliate Marketing',
         stackgroup='one',
         hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
     ))
