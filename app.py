@@ -453,7 +453,8 @@ if st.session_state.calculate:
         yaxis_title="Amount ($)",
         plot_bgcolor="white",
         hovermode="x unified",
-        legend=dict(title=""),
+        legend=dict(title="",orientation='h',y=1.02,xanchor="right", x=1),
+        margin=dict(t=40),
         yaxis=dict(gridcolor="lightgray")
     )
     st.plotly_chart(fig, use_container_width=True)
