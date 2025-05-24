@@ -192,7 +192,7 @@ with st.form("single_page_form", clear_on_submit=False):
     
     # Calculate button
     submit_button=st.form_submit_button("Calculate Projections"):
-    if submit_buttom:
+    if submit_button:
         st.session_state.calculate = True
         st.rerun()
 
