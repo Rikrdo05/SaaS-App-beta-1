@@ -382,7 +382,7 @@ if st.session_state.calculate:
     cumulative_ltv["Months"] = months
     
     if LTV < sem_cpa: 
-        time_to_recover_sem_cac = "No Pay Back" 
+        time_to_recover_sem_cac = 100000
     else: 
         match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= sem_cpa].head(1)
         if not match_row.empty:
@@ -391,7 +391,7 @@ if st.session_state.calculate:
             time_to_recover_sem_cac = "No Pay Back"
         
     if LTV < affiliate_cpa:
-        time_to_recover_sem_affiliate_cpa = "No Pay Back"
+        time_to_recover_sem_affiliate_cpa = 100000
     else:
         match_row = cumulative_ltv[cumulative_ltv["Accumulated Value"] >= affiliate_cpa].head(1)
         if not match_row.empty:
