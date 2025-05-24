@@ -170,23 +170,23 @@ with st.form("single_page_form", clear_on_submit=False):
 
     # Other Revenue Sources
     st.subheader("Other Revenue - Ad Network (e.g, Google AdSense)")
-    cost_col1, cost_col2 = st.columns(2)
+    AdNet_col1, AdNet_col2 = st.columns(2)
     
-    with cost_col1:
+    with AdNet_col1:
         st.session_state.form_data['views per visit'] = st.number_input("Page Views Per Visit", min_value=0.0, value=0.0, step=0.5, format="%.2f")
         st.session_state.form_data['ctr'] = st.number_input("Ad Network Click-Trough Rate CTR %", min_value=0.0, value=0.00, step=0.5, format="%.2f") / 100
-    with cost_col2:
+    with AdNet_col2:
         st.session_state.form_data['cpm'] = st.number_input("Cost Per Mile/1,000 Impressions - CPM Revenue ($)", min_value=0.0, value=5.0, step=0.5, format="%.2f")
         st.session_state.form_data['rev_cpc'] = st.number_input("Cost Per Click - CPC Revenue ($)", min_value=0.00, value=0.00, step=0.01, format="%.2f")
 
     # Other Revenue Sources
     st.subheader("Other Revenue - Affiliate Marketing")
-    cost_col1, cost_col2 = st.columns(2)
+    AdAF_col1, AdAF_col2 = st.columns(2)
     
-    with cost_col1:
+    with AdAF_col1:
         st.session_state.form_data['am_ctr'] = st.number_input("Affiliate Click-Trough Rate CTR %", min_value=0.0, value=0.0, step=0.5, format="%.2f") / 100
  
-    with cost_col2:
+    with AdAF_col2:
         st.session_state.form_data['am_cpa'] = st.number_input("Affiliate Cost Per Action - CPA Revenue ($)", min_value=0.0, value=0, step=0.5, format="%.2f")
     
     # Calculate button - FIXED VERSION
