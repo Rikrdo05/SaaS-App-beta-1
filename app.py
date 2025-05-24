@@ -96,15 +96,15 @@ with st.form("single_page_form", clear_on_submit=False):
     st.markdown("**Affiliate Marketing - Web/App Traffic Monthly Growth by Year**")
     am_cols = st.columns(5)
     with am_cols[0]:
-        st.session_state.form_data['AM_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y1") / 100
+        st.session_state.form_data['am_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y1") / 100
     with am_cols[1]:
-        st.session_state.form_data['AM_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y2") / 100
+        st.session_state.form_data['am_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y2") / 100
     with am_cols[2]:
-        st.session_state.form_data['AM_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y3") / 100
+        st.session_state.form_data['am_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y3") / 100
     with am_cols[3]:
-        st.session_state.form_data['AM_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y4") / 100
+        st.session_state.form_data['am_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y4") / 100
     with am_cols[4]:
-        st.session_state.form_data['AM_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y5") / 100
+        st.session_state.form_data['am_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y5") / 100
     
     # Conversion Rates Section
     st.subheader("Conversion Rate Assumptions (Traffic-to-Trial Rate)")
