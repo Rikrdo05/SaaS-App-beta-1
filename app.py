@@ -191,7 +191,8 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['am_cpa'] = st.number_input("Affiliate Cost Per Action - CPA Revenue ($)", min_value=0.0, value=0, step=0.5, format="%.2f")
     
     # Calculate button
-    if st.form_submit_button("Calculate Projections"):
+    st.form_submit_button("Calculate Projections"):
+    if submit_buttom:
         st.session_state.calculate = True
         st.rerun()
 
