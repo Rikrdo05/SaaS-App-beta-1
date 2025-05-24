@@ -447,14 +447,13 @@ if st.session_state.calculate:
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Gross Income"],
                              mode='lines+markers', name='Gross Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Earnings Before Taxes"],
-                             mode='lines+markers', name='Earnings-EBITDA',hovertemplate='$%{y:,.2f}<extra></extra>'))
+                             mode='lines+markers', name='Earnings<br>EBITDA',hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.update_layout(
         xaxis_title="Year",
         yaxis_title="Amount ($)",
         plot_bgcolor="white",
         hovermode="x unified",
-        legend=dict(title="",orientation='h',y=1.02,xanchor="left", x=1),
-        margin=dict(t=40),
+        legend=dict(title=""),
         yaxis=dict(gridcolor="lightgray")
     )
     st.plotly_chart(fig, use_container_width=True)
