@@ -436,6 +436,38 @@ if st.session_state.calculate:
 
     # Show charts
     st.title("📈 Financial Projections Results")
+
+    # Revenue split chart
+    st.subheader("Monthly Recurring Revenue MRR Split")
+    df_rev_split = df[[
+        'Month',
+        'New Monthly Recurring Revenue MRR',
+        'Renewal Recurring Revenue MRR' 
+    ]]
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df_rev_split["Month"],
+        y=df_rev_split["New Monthly Recurring Revenue MRR"],
+        mode='lines',
+        name='Trial To Paid<br>(New Users)',
+        stackgroup='one',
+        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+    ))
+    fig.add_trace(go.Scatter(
+        x=df_rev_split["Month"],
+        y=df_rev_split["Renewal Recurring Revenue MRR"],
+        mode='lines',
+        name='Recurring<br>Renewals',
+        stackgroup='one',
+        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+    ))
+    fig.update_layout(
+        xaxis_title="Month",
+        yaxis_title="MRR",
+        xaxis=dict(type='category'),
+        yaxis=dict(tickformat="$,.2f")
+    )
+    st.plotly_chart(fig, use_container_width=True)
     
     # Financial performance by year chart
     st.subheader("Financial Performance by Year")
@@ -484,37 +516,7 @@ if st.session_state.calculate:
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    # Revenue split chart
-    st.subheader("Monthly Recurring Revenue MRR Split")
-    df_rev_split = df[[
-        'Month',
-        'New Monthly Recurring Revenue MRR',
-        'Renewal Recurring Revenue MRR' 
-    ]]
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(
-        x=df_rev_split["Month"],
-        y=df_rev_split["New Monthly Recurring Revenue MRR"],
-        mode='lines',
-        name='Trial To Paid<br>(New Users)',
-        stackgroup='one',
-        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
-    ))
-    fig.add_trace(go.Scatter(
-        x=df_rev_split["Month"],
-        y=df_rev_split["Renewal Recurring Revenue MRR"],
-        mode='lines',
-        name='Recurring<br>Renewals',
-        stackgroup='one',
-        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
-    ))
-    fig.update_layout(
-        xaxis_title="Month",
-        yaxis_title="MRR",
-        xaxis=dict(type='category'),
-        yaxis=dict(tickformat="$,.2f")
-    )
-    st.plotly_chart(fig, use_container_width=True)
+
 
     # Key Metrics Summary Table - ADDED AT THE END
     st.subheader("Key Metrics Summary")
