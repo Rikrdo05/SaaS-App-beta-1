@@ -485,11 +485,11 @@ if st.session_state.calculate:
     st.plotly_chart(fig, use_container_width=True)
 
     # Revenue split chart
-    st.subheader("New vs Renewal MRR")
+    st.subheader("Monthly Recurring Revenue MRR Split")
     df_rev_split = df[[
         'Month',
-        'New Monthly Recurring Revenue MRR',
-        'Renewal Recurring Revenue MRR' 
+        'Trial-to-Paid (New Users)',
+        'Recurring Renewals' 
     ]]
     fig = go.Figure()
     fig.add_trace(go.Scatter(
