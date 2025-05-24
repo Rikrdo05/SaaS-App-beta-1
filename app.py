@@ -523,7 +523,7 @@ if st.session_state.calculate:
     metrics_data = {
         "Metric": [
             "Average Monthly Renewal Rate (%)",
-            "User Life Time Value LTV ($)",
+            "User Life Time Value - LTV ($)",
             "SEM Return of Investment - ROI ($)",
             "SEM ROI (%)",
             "Affiliate Marketing ROI ($)",
