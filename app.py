@@ -507,7 +507,7 @@ if st.session_state.calculate:
         'New Monthly Recurring Revenue MRR',
         'Renewal Recurring Revenue MRR' ,
         'Ad Network Revenue',
-        'Ad Affiliate Revenue
+        'Ad Affiliate Revenue'
     ]]
     fig = go.Figure()
     fig.add_trace(go.Scatter(
