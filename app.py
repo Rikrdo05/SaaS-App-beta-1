@@ -374,7 +374,7 @@ if st.session_state.calculate:
     df["SEO Subscriptions"] = df["SEO - Organic Traffic"] * df.index.map(get_seo_cr)
     df["AM Subscriptions"] = df["AM - Paid Traffic"] * df.index.map(get_am_cr)
     df["Total Monthly Subscriptions"] = df["SEM Subscriptions"] + df["SEO Subscriptions"] + df["AM Subscriptions"]
-    df["Website Views"]= (df["SEM - Paid Traffic"]+df["SEO - Organic Traffic"]+df["AM - Paid  Traffic"])*views_per_visit
+    df["Website Views"]= (df["SEM - Paid Traffic"]+df["SEO - Organic Traffic"]+df["AM - Paid Traffic"])*views_per_visit
 
     # Initialize the new column
     df["Trial To Paid Transactions Count"] = 0.0
