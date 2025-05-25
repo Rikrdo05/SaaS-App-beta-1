@@ -555,14 +555,15 @@ if st.session_state.calculate:
     # Financial performance by year chart
     st.subheader("Financial Performance by Year")
     fig = go.Figure()
+    colors = ['#006400','#228B22','#2E8B57','#3CB371]
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Revenue"],
-                             mode='lines+markers', name='Revenue',color='#006400',hovertemplate='$%{y:,.2f}<extra></extra>'))
+                             mode='lines+markers', name='Revenue',line=dict(color=colors[0], width=3),hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Income"],
-                             mode='lines+markers', name='Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
+                             mode='lines+markers', name='Income',line=dict(color=colors[1], width=3),hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Gross Income"],
-                             mode='lines+markers', name='Gross<br>Income',hovertemplate='$%{y:,.2f}<extra></extra>'))
+                             mode='lines+markers', name='Gross<br>Income',line=dict(color=colors[2], width=3),hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Earnings Before Taxes"],
-                             mode='lines+markers', name='Earnings<br>EBITDA',hovertemplate='$%{y:,.2f}<extra></extra>'))
+                             mode='lines+markers', name='Earnings<br>EBITDA',line=dict(color=colors[3], width=3),hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.update_layout(
         xaxis_title="Year",
         yaxis_title="Amount ($)",
