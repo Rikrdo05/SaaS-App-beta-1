@@ -368,7 +368,7 @@ if st.session_state.calculate:
     # Calculate subsequent months
     for i in range(1, 60):
         am_growth_rate = get_am_growth_rate(i)
-        df.at[i, "AM - Paid Traffic"] = df.at[i-1, "AM - Paid  Traffic"] * am_growth_rate
+        df.at[i, "AM - Paid Traffic"] = df.at[i-1, "AM - Paid Traffic"] * am_growth_rate
         
     df["SEM Subscriptions"] = df["SEM - Paid Traffic"] * df.index.map(get_sem_cr)
     df["SEO Subscriptions"] = df["SEO - Organic Traffic"] * df.index.map(get_seo_cr)
