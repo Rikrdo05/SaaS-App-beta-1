@@ -518,7 +518,7 @@ if st.session_state.calculate:
         mode='lines',
         name='Trial To Paid<br>(New Users)',
         stackgroup='one',
-        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+        hovertemplate='Trial To Paid: $%{y:,.2f}<extra></extra>'
     ))
     fig.add_trace(go.Scatter(
         x=df_rev_split["Month"],
@@ -526,7 +526,7 @@ if st.session_state.calculate:
         mode='lines',
         name='Recurring<br>Renewals',
         stackgroup='one',
-        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+        hovertemplate='Recurring Renewal: $%{y:,.2f}<extra></extra>'
     ))
     fig.add_trace(go.Scatter(
         x=df_rev_split["Month"],
@@ -534,7 +534,7 @@ if st.session_state.calculate:
         mode='lines',
         name='Ad Network',
         stackgroup='one',
-        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+        hovertemplate='Ad Network: $%{y:,.2f}<extra></extra>'
     ))
     fig.add_trace(go.Scatter(
         x=df_rev_split["Month"],
@@ -542,7 +542,7 @@ if st.session_state.calculate:
         mode='lines',
         name='Ad Affiliate Marketing',
         stackgroup='one',
-        hovertemplate='New MRR: $%{y:,.2f}<extra></extra>'
+        hovertemplate='Ad Affiliate: $%{y:,.2f}<extra></extra>'
     ))
     fig.update_layout(
         xaxis_title="Month",
