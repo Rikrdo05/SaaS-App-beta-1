@@ -174,10 +174,10 @@ with st.form("single_page_form", clear_on_submit=False):
     
     with AdNet_col1:
         st.session_state.form_data['views per visit'] = st.number_input("Page Views Per Visit", min_value=0.0, value=0.0, step=0.5, format="%.2f")
-        st.session_state.form_data['ctr'] = st.number_input("Ad Network Click-Trough Rate CTR %", min_value=0.0, value=0.00, step=0.5, format="%.2f") / 100
+        
     with AdNet_col2:
         st.session_state.form_data['cpm'] = st.number_input("Revenue Per Mile/1,000 Impressions - RPM Revenue ($)", min_value=0.0, value=5.0, step=0.5, format="%.2f")
-        st.session_state.form_data['rev_cpc'] = st.number_input("Revenue Per Click - RPC Revenue ($)", min_value=0.00, value=0.00, step=0.01, format="%.2f")
+        
 
     # Other Revenue Sources
     st.subheader("Other Revenue - Affiliate Marketing")
@@ -249,8 +249,8 @@ if st.session_state.calculate:
     monthly_labor_cost = form_data['monthly_labor_cost']
     views_per_visit=form_data['views per visit']
     cpm=form_data['cpm']
-    ctr=form_data['ctr']
-    cpc_rev=form_data['rev_cpc']
+    
+    
     am_ctr=form_data['am_ctr']
     am_cpa=form_data['am_cpa']
     am_ocr=form_data['am_ocr']
@@ -403,7 +403,7 @@ if st.session_state.calculate:
 
     df['New Monthly Recurring Revenue MRR'] = df["Trial To Paid Transactions Count"] * subscription_price
     df['Renewal Recurring Revenue MRR'] = df["Monthly Renewal Transactions Count"] * subscription_price
-    df["Ad Network Revenue"]=(df["Website Views"]*(cpm/1000)) + (df["Website Views"]*ctr*cpc_rev)
+    df["Ad Network Revenue"]=(df["Website Views"]*(cpm/1000))
     df['Ad Affiliate Revenue']=df["Website Views"]*am_ctr*am_ocr*am_cpa
     df['Total Monthly Recurring Revenue MRR'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR'] +df["Ad Network Revenue"]+df['Ad Affiliate Revenue']
     df['Chargebacks'] = df['Total Monthly Recurring Revenue MRR'] * chb_rate
