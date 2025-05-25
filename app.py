@@ -555,7 +555,7 @@ if st.session_state.calculate:
     # Financial performance by year chart
     st.subheader("Financial Performance by Year")
     fig = go.Figure()
-    colors = ['#006400','#228B22','#2E8B57','#3CB371]
+    colors = ['#006400','#228B22','#2E8B57','#3CB371']
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Revenue"],
                              mode='lines+markers', name='Revenue',line=dict(color=colors[0], width=3),hovertemplate='$%{y:,.2f}<extra></extra>'))
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Income"],
