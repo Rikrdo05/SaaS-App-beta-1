@@ -424,7 +424,7 @@ if st.session_state.calculate:
         current_earnings = df.loc[i, 'Earnings Before Taxes']
         df.loc[i, 'Cash Flow Accumulation'] = prev_cf + current_earnings
 
-    df["Internet Marketing CAC Weighted average"] = ((df["SEM Subscriptions"] * sem_cpa) + (df["Affiliate Marketing Subscriptions"] * affiliate_cpa)) / (df["SEM Subscriptions"] + df["Affiliate Marketing Subscriptions"])
+    df["Internet Marketing CAC Weighted average"] = ((df["SEM Subscriptions"] * sem_cpa) + (df["AM Subscriptions"] * affiliate_cpa)) / (df["SEM Subscriptions"] + df["Affiliate Marketing Subscriptions"])
 
     # dataframe for cac payback period
     first_value = subscription_price * trial_to_paid
