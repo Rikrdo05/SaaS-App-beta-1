@@ -636,3 +636,11 @@ if st.session_state.calculate:
         hide_index=True,
         use_container_width=True
     )
+    csv = df.to_csv(index=False).encode('utf-8')
+    st.download_button(
+        label="Download Full Data as CSV",
+        data=csv,
+        file_name='saas_financial_projections.csv',
+        mime='text/csv',
+        help="Click to download the complete financial projections data"
+    )
