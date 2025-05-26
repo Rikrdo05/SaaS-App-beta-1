@@ -264,73 +264,73 @@ if st.session_state.calculate:
 
     # First, let's create a function to determine the growth rate based on the month index
     def get_sem_growth_rate(month_idx):
-        if month_idx <= 12:  # Year 1
+        if month_idx <= 11:  # Year 1
             return 1 + sem_traffic_gr_y1
-        elif month_idx <= 24:  # Year 2
+        elif month_idx <= 23:  # Year 2
             return 1 + sem_traffic_gr_y2
-        elif month_idx <= 36:  # Year 3
+        elif month_idx <= 35:  # Year 3
             return 1 + sem_traffic_gr_y3
-        elif month_idx <= 48:  # Year 4
+        elif month_idx <= 47:  # Year 4
             return 1 + sem_traffic_gr_y4
         else:  # Year 5
             return 1 + sem_traffic_gr_y5
 
     def get_sem_cr(month_idx):
-        if month_idx <= 12:    # Year 1
+        if month_idx <= 11:    # Year 1
             return sem_cr_y1
-        elif month_idx <= 24:  # Year 2
+        elif month_idx <= 23:  # Year 2
             return sem_cr_y2
-        elif month_idx <= 36:  # Year 3
+        elif month_idx <= 35:  # Year 3
             return sem_cr_y3
-        elif month_idx <= 48:  # Year 4
+        elif month_idx <= 47:  # Year 4
             return sem_cr_y4
         else:                  # Year 5
             return sem_cr_y5  
 
     def get_seo_growth_rate(month_idx):
-        if month_idx <= 12:  # Year 1
+        if month_idx <= 11:  # Year 1
             return 1 + seo_traffic_gr_y1
-        elif month_idx <= 24:  # Year 2
+        elif month_idx <= 23:  # Year 2
             return 1 + seo_traffic_gr_y2
-        elif month_idx <= 36:  # Year 3
+        elif month_idx <= 35:  # Year 3
             return 1 + seo_traffic_gr_y3
-        elif month_idx <= 48:  # Year 4
+        elif month_idx <= 47:  # Year 4
             return 1 + seo_traffic_gr_y4
         else:  # Year 5
             return 1 + seo_traffic_gr_y5
 
     def get_seo_cr(month_idx):
-        if month_idx <= 12:    # Year 1
+        if month_idx <= 11:    # Year 1
             return seo_cr_y1
-        elif month_idx <= 24:  # Year 2
+        elif month_idx <= 23:  # Year 2
             return seo_cr_y2
-        elif month_idx <= 36:  # Year 3
+        elif month_idx <= 35:  # Year 3
             return seo_cr_y3
-        elif month_idx <= 48:  # Year 4
+        elif month_idx <= 47:  # Year 4
             return seo_cr_y4
         else:                  # Year 5
             return seo_cr_y5      
 
     def get_am_growth_rate(month_idx):
-        if month_idx <= 12:  # Year 1
+        if month_idx <= 11:  # Year 1
             return 1 + am_traffic_gr_y1
-        elif month_idx <= 24:  # Year 2
+        elif month_idx <= 23:  # Year 2
             return 1 + am_traffic_gr_y2
-        elif month_idx <= 36:  # Year 3
+        elif month_idx <= 35:  # Year 3
             return 1 + am_traffic_gr_y3
-        elif month_idx <= 48:  # Year 4
+        elif month_idx <= 47:  # Year 4
             return 1 + am_traffic_gr_y4
         else:  # Year 5
             return 1 + am_traffic_gr_y5
 
     def get_am_cr(month_idx):
-        if month_idx <= 12:    # Year 1
+        if month_idx <= 11:    # Year 1
             return am_cr_y1
-        elif month_idx <= 24:  # Year 2
+        elif month_idx <= 23:  # Year 2
             return am_cr_y2
-        elif month_idx <= 36:  # Year 3
+        elif month_idx <= 35:  # Year 3
             return am_cr_y3
-        elif month_idx <= 48:  # Year 4
+        elif month_idx <= 47:  # Year 4
             return am_cr_y4
         else:                  # Year 5
             return am_cr_y5
