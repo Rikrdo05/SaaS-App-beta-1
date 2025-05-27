@@ -407,7 +407,7 @@ if st.session_state.calculate:
     df['Renewal Recurring Revenue MRR'] = df["Monthly Renewal Transactions Count"] * subscription_price
     df["Ad Network Revenue"]=(df["Website Views"]*(cpm/1000)) if views_per_visit > 0 else 0
     df['Ad Affiliate Revenue']=df["Website Views"]*am_ctr*am_ocr*am_cpa/views_per_visit
-    df['Total Monthly Recurring Revenue MRR'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR'] +df["Ad Network Revenue"]+df['Ad Affiliate Revenue']
+    df['Revenue'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR'] +df["Ad Network Revenue"]+df['Ad Affiliate Revenue']
     df['Chargebacks'] = df['Total Monthly Recurring Revenue MRR'] * chb_rate
     df['Refunds'] = df['Total Monthly Recurring Revenue MRR'] * refund_rate
     df['Income'] = df['Total Monthly Recurring Revenue MRR'] - df['Refunds'] - df['Chargebacks']
@@ -483,7 +483,7 @@ if st.session_state.calculate:
     df_financials = df[[
         'Month',
         'Year',
-        'Total Monthly Recurring Revenue MRR',
+        'Revenue',
         'Chargebacks',
         'Refunds',
         'Income',
@@ -498,7 +498,7 @@ if st.session_state.calculate:
         'Technology & Software',
         'Earnings Before Taxes',
         'Cash Flow Accumulation'
-    ]].rename(columns={'Total Monthly Recurring Revenue MRR': 'Revenue'})
+    ]]
     df_financials_by_year = df_financials.groupby("Year", as_index=False).sum(numeric_only=True)
 
     # Show charts
@@ -556,8 +556,7 @@ if st.session_state.calculate:
     
     # Financial performance by year chart
     st.subheader("Financial Performance by Year")
-    df_financials_by_year = df_financials.groupby("Year").agg({'Revenue': 'sum','Income': 'sum','Gross Income': 'sum','Earnings Before Taxes': 'sum'}).reset_index()
-
+    
     fig = go.Figure()
     colors = ['#006400','#2E8B57','#3CB371','#90EE90']
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Revenue"],
