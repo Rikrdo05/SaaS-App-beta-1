@@ -65,7 +65,7 @@ with st.form("single_page_form", clear_on_submit=False):
     st.subheader("Web/App Traffic Monthly Growth Rates by Year")
     
     # SEM Growth Rates
-    st.markdown("**SEM Web/App Traffic Monthly Growth by Year**")
+    st.markdown("**SEM Web/App Traffic Monthly Growth Rate by Year**")
     _cols = st.columns(5)
     with _cols[0]:
         st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
@@ -79,7 +79,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['sem_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y5") / 100
     
     # SEO Growth Rates
-    st.markdown("**SEO - Web/App Traffic Monthly Growth by Year**")
+    st.markdown("**SEO - Web/App Traffic Monthly Growth Rate by Year**")
     seo_cols = st.columns(5)
     with seo_cols[0]:
         st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y1") / 100
@@ -113,43 +113,43 @@ with st.form("single_page_form", clear_on_submit=False):
     st.markdown("**SEM (Paid Traffic) Conversion Rates**")
     sem_cr_cols = st.columns(5)
     with sem_cr_cols[0]:
-        st.session_state.form_data['sem_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="sem_cr_y1") / 100
+        st.session_state.form_data['sem_cr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 4.0, 0.5, key="sem_cr_y1") / 100
     with sem_cr_cols[1]:
-        st.session_state.form_data['sem_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="sem_cr_y2") / 100
+        st.session_state.form_data['sem_cr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 4.5, 0.5, key="sem_cr_y2") / 100
     with sem_cr_cols[2]:
-        st.session_state.form_data['sem_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="sem_cr_y3") / 100
+        st.session_state.form_data['sem_cr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 5.0, 0.5, key="sem_cr_y3") / 100
     with sem_cr_cols[3]:
-        st.session_state.form_data['sem_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="sem_cr_y4") / 100
+        st.session_state.form_data['sem_cr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 5.5, 0.5, key="sem_cr_y4") / 100
     with sem_cr_cols[4]:
-        st.session_state.form_data['sem_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="sem_cr_y5") / 100
+        st.session_state.form_data['sem_cr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 6.0, 0.5, key="sem_cr_y5") / 100
     
     # SEO Conversion Rates
     st.markdown("**SEO (Organic Traffic) Conversion Rates**")
     seo_cr_cols = st.columns(5)
     with seo_cr_cols[0]:
-        st.session_state.form_data['seo_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="seo_cr_y1") / 100
+        st.session_state.form_data['seo_cr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 4.0, 0.5, key="seo_cr_y1") / 100
     with seo_cr_cols[1]:
-        st.session_state.form_data['seo_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="seo_cr_y2") / 100
+        st.session_state.form_data['seo_cr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 4.5, 0.5, key="seo_cr_y2") / 100
     with seo_cr_cols[2]:
-        st.session_state.form_data['seo_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="seo_cr_y3") / 100
+        st.session_state.form_data['seo_cr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 5.0, 0.5, key="seo_cr_y3") / 100
     with seo_cr_cols[3]:
-        st.session_state.form_data['seo_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="seo_cr_y4") / 100
+        st.session_state.form_data['seo_cr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 5.5, 0.5, key="seo_cr_y4") / 100
     with seo_cr_cols[4]:
-        st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="seo_cr_y5") / 100
+        st.session_state.form_data['seo_cr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 6.0, 0.5, key="seo_cr_y5") / 100
 
     # Affiliate Marketing Conversion Rates
     st.markdown("**Affiliate Marketing Traffic Conversion Rates**")
     am_cr_cols = st.columns(5)
     with am_cr_cols[0]:
-        st.session_state.form_data['am_cr_y1'] = st.number_input("Year 1", 0.0, 100.0, 4.0, 0.5, key="am_cr_y1") / 100
+        st.session_state.form_data['am_cr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 4.0, 0.5, key="am_cr_y1") / 100
     with am_cr_cols[1]:
-        st.session_state.form_data['am_cr_y2'] = st.number_input("Year 2", 0.0, 100.0, 4.5, 0.5, key="am_cr_y2") / 100
+        st.session_state.form_data['am_cr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 4.5, 0.5, key="am_cr_y2") / 100
     with am_cr_cols[2]:
-        st.session_state.form_data['am_cr_y3'] = st.number_input("Year 3", 0.0, 100.0, 5.0, 0.5, key="am_cr_y3") / 100
+        st.session_state.form_data['am_cr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 5.0, 0.5, key="am_cr_y3") / 100
     with am_cr_cols[3]:
-        st.session_state.form_data['am_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="am_cr_y4") / 100
+        st.session_state.form_data['am_cr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 5.5, 0.5, key="am_cr_y4") / 100
     with am_cr_cols[4]:
-        st.session_state.form_data['am_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="am_cr_y5") / 100
+        st.session_state.form_data['am_cr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 6.0, 0.5, key="am_cr_y5") / 100
 
     
 
