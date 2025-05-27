@@ -45,7 +45,7 @@ with st.form("single_page_form", clear_on_submit=False):
         
     
     # Traffic Inputs
-    st.subheader("Traffic Parameters")
+    st.subheader("Web/App Traffic Parameters")
     traffic_col1, traffic_col2, traffic_col3 = st.columns(3)
     
     with traffic_col1:
