@@ -158,8 +158,8 @@ with st.form("single_page_form", clear_on_submit=False):
     cost_col1, cost_col2 = st.columns(2)
     
     with cost_col1:
-        st.session_state.form_data['sem_cpa'] = st.number_input("SEM Cost Per User Acquisition - CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
-        st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Cost Per User Acquisition - CPA ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
+        st.session_state.form_data['sem_cpa'] = st.number_input("SEM Customer Acquisition Cost - CAC ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
+        st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Customer Acquisition Cost - CAC ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
         st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (% of Revenue)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
         st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (% of Revenue)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
         
@@ -627,12 +627,12 @@ if st.session_state.calculate:
         "Value": [
             f"{renewal_rate:.1%}",
             f"${LTV:,.2f}",
-            f"${sem_roi:,.2f}",
-            f"{sem_roi_percent:.2%}" if sem_roi_percent is not None else "N/A. You input SEM CPA = 0.00",
-            f"${affiliate_marketing_roi:,.2f}",
-            f"{affiliate_marketing_roi_percent:.2%}" if affiliate_marketing_roi_percent is not None else "N/A",
-            "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
-            "Immediately" if time_to_recover_affiliate_cac == 0.0 else "Not Profitable" if time_to_recover_affiliate_cac>1200 else f"{time_to_recover_affiliate_cac:,.2f}"
+            f"${sem_roi:,.2f}" if sem_roi_percent is not None else "N/A. You input SEM CAC = 0.00",
+            f"{sem_roi_percent:.2%}" if sem_roi_percent is not None else "N/A. You input SEM CAC = 0.00",
+            f"${affiliate_marketing_roi:,.2f}" if affiliate_marketing_roi_percent is not None else "N/A You input Affiliate Marketing CAC = 0.00",
+            f"{affiliate_marketing_roi_percent:.2%}" if affiliate_marketing_roi_percent is not None else "N/A You input Affiliate Marketing CAC = 0.00",
+            "N/A. You input SEM CAC = 0.00" if sem_roi_percent is None else "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
+            "N/A You input Affiliate Marketing CAC = 0.00" if affiliate_marketing_roi_percent is None else "Immediately" if time_to_recover_affiliate_cac == 0.0 else "Not Profitable" if time_to_recover_affiliate_cac>1200 else f"{time_to_recover_affiliate_cac:,.2f}"
         ]
     }
     metrics_df = pd.DataFrame(metrics_data)
