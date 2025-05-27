@@ -267,19 +267,19 @@ if st.session_state.calculate:
     # First, let's create a function to determine the growth rate based on the month index
     def get_sem_growth_rate(month_idx):
         if month_idx <= 11:  # Year 1
-            return 1 + sem_traffic_gr_y1
+            return 1 + sem_traffic_gr_y1 if sem_traffic_gr_y1 != 0 else 1
         elif month_idx <= 23:  # Year 2
-            return 1 + sem_traffic_gr_y2
+            return 1 + sem_traffic_gr_y2 if sem_traffic_gr_y2 != 0 else 1
         elif month_idx <= 35:  # Year 3
-            return 1 + sem_traffic_gr_y3
+            return 1 + sem_traffic_gr_y3 if sem_traffic_gr_y3 != 0 else 1
         elif month_idx <= 47:  # Year 4
-            return 1 + sem_traffic_gr_y4
+            return 1 + sem_traffic_gr_y4 if sem_traffic_gr_y4 != 0 else 1
         else:  # Year 5
-            return 1 + sem_traffic_gr_y5
+            return 1 + sem_traffic_gr_y5 if sem_traffic_gr_y5 != 0 else 1
 
     def get_sem_cr(month_idx):
         if month_idx <= 11:    # Year 1
-            return sem_cr_y1
+            return sem_cr_y1 
         elif month_idx <= 23:  # Year 2
             return sem_cr_y2
         elif month_idx <= 35:  # Year 3
