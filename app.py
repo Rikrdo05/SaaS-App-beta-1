@@ -62,7 +62,7 @@ with st.form("single_page_form", clear_on_submit=False):
             value=10000, step=1000, format="%d")    
     
     # Growth Rates Section
-    st.subheader("Traffic Monthly Growth Rates by Year")
+    st.subheader("Web/App Traffic Monthly Growth Rates by Year")
     
     # SEM Growth Rates
     st.markdown("**SEM Web/App Traffic Monthly Growth by Year**")
