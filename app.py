@@ -408,10 +408,10 @@ if st.session_state.calculate:
     df["Ad Network Revenue"]=(df["Website Views"]*(cpm/1000)) if views_per_visit > 0 else 0
     df['Ad Affiliate Revenue']=df["Website Views"]*am_ctr*am_ocr*am_cpa/views_per_visit
     df['Revenue'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR'] +df["Ad Network Revenue"]+df['Ad Affiliate Revenue']
-    df['Chargebacks'] = df['Total Monthly Recurring Revenue MRR'] * chb_rate
-    df['Refunds'] = df['Total Monthly Recurring Revenue MRR'] * refund_rate
-    df['Income'] = df['Total Monthly Recurring Revenue MRR'] - df['Refunds'] - df['Chargebacks']
-    df['Credit Card Processing'] = df['Total Monthly Recurring Revenue MRR'] * ccp_rate
+    df['Chargebacks'] = df['Revenue'] * chb_rate
+    df['Refunds'] = df['Revenue'] * refund_rate
+    df['Income'] = df['Revenue'] - df['Refunds'] - df['Chargebacks']
+    df['Credit Card Processing'] = df['Revenue'] * ccp_rate
     df['Web Hosting'] = monthly_web_hosting_cost
     df['Cost of Goods/Services Sold'] = df['Credit Card Processing'] + df['Web Hosting']
     df['Gross Income'] = df['Income'] - df['Cost of Goods/Services Sold']
