@@ -58,7 +58,7 @@ with st.form("single_page_form", clear_on_submit=False):
             value=100000, step=1000, format="%d")
     with traffic_col3:
         st.session_state.form_data['am_traffic_m1'] = st.number_input(
-            "Affiliate Marketing Traffic - First Month", min_value=0, 
+            "Affiliate Marketing Traffic - First Month (Traffic coming from another website)", min_value=0, 
             value=10000, step=1000, format="%d")    
     
     # Growth Rates Section
@@ -150,23 +150,6 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['am_cr_y4'] = st.number_input("Year 4", 0.0, 100.0, 5.5, 0.5, key="am_cr_y4") / 100
     with am_cr_cols[4]:
         st.session_state.form_data['am_cr_y5'] = st.number_input("Year 5", 0.0, 100.0, 6.0, 0.5, key="am_cr_y5") / 100
-    
-
-    # Cost Assumptions Section
-    st.subheader("Cost Assumptions")
-    cost_col1, cost_col2 = st.columns(2)
-    
-    with cost_col1:
-        st.session_state.form_data['sem_cpa'] = st.number_input("SEM Cost Per User Acquisition - CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
-        st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing CPA ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
-        st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (% of Revenue)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
-        st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (% of Revenue)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
-        
-    with cost_col2:
-        st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (% of Revenue)", min_value=0.0, value=0.5, step=0.5, format="%.2f") / 100
-        st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)", min_value=0, value=300, step=50)
-        st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)", min_value=0, value=300, step=50)
-        st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", min_value=0, value=10000, step=1000)
 
     # Other Revenue Sources
     st.subheader("Other Revenue - Ad Network (e.g, Google AdSense)")
@@ -180,7 +163,7 @@ with st.form("single_page_form", clear_on_submit=False):
         
 
     # Other Revenue Sources
-    st.subheader("Other Revenue - Affiliate Marketing")
+    st.subheader("Other Revenue - Affiliate Marketing (Promoting an specific Merchant/Web/App)")
     AdAF_col1, AdAF_col2 = st.columns(2)
     
     with AdAF_col1:
@@ -189,7 +172,25 @@ with st.form("single_page_form", clear_on_submit=False):
  
     with AdAF_col2:
         st.session_state.form_data['am_ocr'] = st.number_input("Affiliate Offer Conversion Rate %", min_value=0.0, value=0.0, step=0.5, format="%.2f") / 100
-            
+     
+
+    # Cost Assumptions Section
+    st.subheader("Cost Assumptions")
+    cost_col1, cost_col2 = st.columns(2)
+    
+    with cost_col1:
+        st.session_state.form_data['sem_cpa'] = st.number_input("SEM Cost Per User Acquisition - CPA ($)", min_value=0.0, value=20.0, step=0.5, format="%.2f")
+        st.session_state.form_data['affiliate_cpa'] = st.number_input("Affiliate Marketing Cost Per User Acquisition - CPA ($)", min_value=0.0, value=11.0, step=0.5, format="%.2f")
+        st.session_state.form_data['ccp_rate'] = st.number_input("Credit Card Processing Cost (% of Revenue)", min_value=0.0, value=10.0, step=0.5, format="%.2f") / 100
+        st.session_state.form_data['refund_rate'] = st.number_input("Refund Rate (% of Revenue)", min_value=0.0, value=5.0, step=0.5, format="%.2f") / 100
+        
+    with cost_col2:
+        st.session_state.form_data['chb_rate'] = st.number_input("Chargeback Rate (% of Revenue)", min_value=0.0, value=0.5, step=0.5, format="%.2f") / 100
+        st.session_state.form_data['monthly_web_hosting_cost'] = st.number_input("Monthly Web Hosting Cost ($)", min_value=0, value=300, step=50)
+        st.session_state.form_data['monthly_techsoft_cost'] = st.number_input("Monthly Technology & Software Cost ($)", min_value=0, value=300, step=50)
+        st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", min_value=0, value=10000, step=1000)
+
+           
     # Calculate button - FIXED VERSION
     if st.form_submit_button("Calculate Projections"):
         st.session_state.calculate = True
