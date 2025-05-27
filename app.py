@@ -171,7 +171,7 @@ with st.form("single_page_form", clear_on_submit=False):
 
     # Other Revenue Sources
     st.subheader("Other Revenue - Ad Network (e.g, Google AdSense)")
-    st.write("Set the below values to 0.00 if Ad Network is not part of your revenue model")
+    st.write(""Set the below values to 0.00 if Ad Network is not part of your revenue model"")
     AdNet_col1, AdNet_col2 = st.columns(2)
     
     with AdNet_col1:
@@ -183,7 +183,7 @@ with st.form("single_page_form", clear_on_submit=False):
 
     # Other Revenue Sources
     st.subheader("Other Revenue - Affiliate Marketing (Promoting an specific merchant/Website/App)")
-    st.write("Set the below values to 0.00 if you are not promoting any third party merchant/website/App")
+    st.write(""Set the below values to 0.00 if you are not promoting any third party merchant/website/App"")
     AdAF_col1, AdAF_col2 = st.columns(2)
     
     with AdAF_col1:
