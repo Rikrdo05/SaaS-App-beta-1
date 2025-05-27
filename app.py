@@ -181,7 +181,7 @@ with st.form("single_page_form", clear_on_submit=False):
         
 
     # Other Revenue Sources
-    st.subheader("Other Revenue - Affiliate Marketing (Promoting an specific Merchant/Web/App)")
+    st.subheader("Other Revenue - Affiliate Marketing (Promoting an specific merchant/Web/App)")
     AdAF_col1, AdAF_col2 = st.columns(2)
     
     with AdAF_col1:
