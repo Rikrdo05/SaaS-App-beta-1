@@ -616,7 +616,7 @@ if st.session_state.calculate:
     metrics_data = {
         "Metric": [
             "Average Monthly Renewal Rate (%)",
-            "User Life Time Value - LTV ($)",
+            "User Subscription Life Time Value - LTV ($)",
             "SEM Return of Investment - ROI ($)",
             "SEM ROI (%)",
             "Affiliate Marketing ROI ($)",
@@ -629,10 +629,10 @@ if st.session_state.calculate:
             f"${LTV:,.2f}",
             f"${sem_roi:,.2f}" if sem_roi_percent is not None else "N/A. You input SEM CAC = 0.00",
             f"{sem_roi_percent:.2%}" if sem_roi_percent is not None else "N/A. You input SEM CAC = 0.00",
-            f"${affiliate_marketing_roi:,.2f}" if affiliate_marketing_roi_percent is not None else "N/A You input Affiliate Marketing CAC = 0.00",
-            f"{affiliate_marketing_roi_percent:.2%}" if affiliate_marketing_roi_percent is not None else "N/A You input Affiliate Marketing CAC = 0.00",
+            f"${affiliate_marketing_roi:,.2f}" if affiliate_marketing_roi_percent is not None else "N/A. You input Affiliate Marketing CAC = 0.00",
+            f"{affiliate_marketing_roi_percent:.2%}" if affiliate_marketing_roi_percent is not None else "N/A. You input Affiliate Marketing CAC = 0.00",
             "N/A. You input SEM CAC = 0.00" if sem_roi_percent is None else "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
-            "N/A You input Affiliate Marketing CAC = 0.00" if affiliate_marketing_roi_percent is None else "Immediately" if time_to_recover_affiliate_cac == 0.0 else "Not Profitable" if time_to_recover_affiliate_cac>1200 else f"{time_to_recover_affiliate_cac:,.2f}"
+            "N/A. You input Affiliate Marketing CAC = 0.00" if affiliate_marketing_roi_percent is None else "Immediately" if time_to_recover_affiliate_cac == 0.0 else "Not Profitable" if time_to_recover_affiliate_cac>1200 else f"{time_to_recover_affiliate_cac:,.2f}"
         ]
     }
     metrics_df = pd.DataFrame(metrics_data)
