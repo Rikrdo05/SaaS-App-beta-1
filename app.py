@@ -249,7 +249,7 @@ if st.session_state.calculate:
     monthly_web_hosting_cost = form_data['monthly_web_hosting_cost']
     monthly_techsoft_cost = form_data['monthly_techsoft_cost']
     monthly_labor_cost = form_data['monthly_labor_cost']
-    views_per_visit=form_data['views per visit']
+    views_per_visit=0.000000001 if form_data['views per visit'] == 0 else form_data['views per visit']
     cpm=form_data['cpm']
     
     
