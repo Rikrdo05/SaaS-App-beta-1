@@ -628,7 +628,7 @@ if st.session_state.calculate:
             f"{renewal_rate:.1%}",
             f"${LTV:,.2f}",
             f"${sem_roi:,.2f}",
-            f"{sem_roi_percent:.2%}" if sem_roi_percent is not None else "N/A. SEM Cost Per User Acquisition was set to 0.0 in Inputs Submissions.",
+            f"{sem_roi_percent:.2%}" if sem_roi_percent is not None else "N/A. SEM Cost Per User Acquisition\nwas set to 0.0 in Inputs Submissions.",
             f"${affiliate_marketing_roi:,.2f}",
             f"{affiliate_marketing_roi_percent:.2%}" if affiliate_marketing_roi_percent is not None else "N/A",
             "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
