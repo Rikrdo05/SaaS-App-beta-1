@@ -258,7 +258,11 @@ if st.session_state.calculate:
     am_ocr=form_data['am_ocr']
     renewal_rate = 1 - churn_rate
     LTV = (subscription_price * trial_to_paid) / (1 - renewal_rate)
-    sem_roi=LTV-sem_cpa if sem_cpa == 0:sem_roi_percent = None else: sem_roi_percent = sem_roi / sem_cpa
+    sem_roi=LTV-sem_cpa 
+    if sem_cpa == 0:
+        sem_roi_percent = None 
+    else: 
+        sem_roi_percent = sem_roi / sem_cpa
     affiliate_marketing_roi=LTV-affiliate_cpa
     affiliate_marketing_roi_percent=affiliate_marketing_roi/affiliate_cpa
     
