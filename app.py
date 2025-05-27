@@ -264,8 +264,11 @@ if st.session_state.calculate:
     else: 
         sem_roi_percent = sem_roi / sem_cpa
     affiliate_marketing_roi=LTV-affiliate_cpa
-    affiliate_marketing_roi_percent=affiliate_marketing_roi/affiliate_cpa
     
+    if affiliate_cpa == 0:
+        affiliate_marketing_roi_percent = None 
+    else: 
+        affiliate_marketing_roi_percent = affiliate_marketing_roi/affiliate_cpa
 
     # First, let's create a function to determine the growth rate based on the month index
     def get_sem_growth_rate(month_idx):
