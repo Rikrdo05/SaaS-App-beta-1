@@ -556,6 +556,8 @@ if st.session_state.calculate:
     
     # Financial performance by year chart
     st.subheader("Financial Performance by Year")
+    df_financials_by_year = df_financials.groupby("Year").agg({'Revenue': 'sum','Income': 'sum','Gross Income': 'sum','Earnings Before Taxes': 'sum'}).reset_index()
+
     fig = go.Figure()
     colors = ['#006400','#2E8B57','#3CB371','#90EE90']
     fig.add_trace(go.Scatter(x=df_financials_by_year["Year"], y=df_financials_by_year["Revenue"],
