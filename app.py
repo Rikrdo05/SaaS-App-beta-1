@@ -405,7 +405,7 @@ if st.session_state.calculate:
 
     df['New Monthly Recurring Revenue MRR'] = df["Trial To Paid Transactions Count"] * subscription_price
     df['Renewal Recurring Revenue MRR'] = df["Monthly Renewal Transactions Count"] * subscription_price
-    df["Ad Network Revenue"]=(df["Website Views"]*(cpm/1000))
+    df["Ad Network Revenue"]=(df["Website Views"]*(cpm/1000)) if views_per_visit > 0 else 0
     df['Ad Affiliate Revenue']=df["Website Views"]*am_ctr*am_ocr*am_cpa/views_per_visit
     df['Total Monthly Recurring Revenue MRR'] = df['Renewal Recurring Revenue MRR'] + df['New Monthly Recurring Revenue MRR'] +df["Ad Network Revenue"]+df['Ad Affiliate Revenue']
     df['Chargebacks'] = df['Total Monthly Recurring Revenue MRR'] * chb_rate
