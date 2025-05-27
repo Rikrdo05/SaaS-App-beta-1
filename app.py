@@ -601,14 +601,15 @@ if st.session_state.calculate:
     fig.update_traces(
         hovertemplate='$%{y:,.2f}<extra></extra>',
         texttemplate='$%{y:,.2f}',
-        textposition='outside'
+        textposition='outside',
+        textfont_color='darkgray'
     )
     fig.update_layout(
         xaxis_title="Year",
         yaxis_title="Cash Flow Accumulation",
         bargap=0.3,
         plot_bgcolor="white",
-        yaxis_gridcolor="darkgray"
+        yaxis_gridcolor="lightgray"
     )
     st.plotly_chart(fig, use_container_width=True)
 
