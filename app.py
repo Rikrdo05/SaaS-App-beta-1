@@ -607,7 +607,7 @@ if st.session_state.calculate:
         yaxis_title="Cash Flow Accumulation",
         bargap=0.3,
         plot_bgcolor="white",
-        yaxis_gridcolor="lightgray"
+        yaxis_gridcolor="darkgray"
     )
     st.plotly_chart(fig, use_container_width=True)
 
