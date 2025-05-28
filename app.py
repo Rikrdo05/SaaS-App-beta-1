@@ -567,6 +567,52 @@ if st.session_state.calculate:
     )
     
     st.plotly_chart(fig, use_container_width=True)    
+
+    # Monthly Subscriptions
+    st.subheader("Monthly Subscriptions")
+    df_subscriptions = df[[
+        'Month',
+        'Total Monthly Subscriptions',
+        'Trial To Paid Transactions Count'
+    ]]
+    
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df_subscriptions["Month"],
+        y=df_subscriptions["Total Monthly Subscriptions"],
+        mode='lines',
+        name='New Monthly<br>Subscriptions',
+        line=dict(color='#4E79A7', width=2),
+        hovertemplate='Total Subs: %{y:,.0f}<extra></extra>'
+    ))
+    fig.add_trace(go.Scatter(
+        x=df_subscriptions["Month"],
+        y=df_subscriptions["Trial To Paid Transactions Count"],
+        mode='lines',
+        name='Trial To Paid<br>New Users',
+        line=dict(color='#F28E2B', width=2),
+        hovertemplate='Trial To Paid: %{y:,.0f}<extra></extra>'
+    ))
+    
+    fig.update_layout(
+        xaxis_title="Month",
+        yaxis_title="Count",
+        xaxis=dict(
+            type='date',
+            tickformat='%b-%Y',
+            tickmode='auto',
+            nticks=30,
+            tickangle=-45
+        ),
+        yaxis=dict(tickformat=","),
+        hovermode="x unified",
+        legend=dict(title="Subscription Type"),
+        plot_bgcolor="white",
+        yaxis_gridcolor="lightgray",
+        margin=dict(t=25)
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
     
     # Revenue split chart
     st.subheader("Monthly Recurring Revenue MRR Split")
