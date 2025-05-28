@@ -563,7 +563,7 @@ if st.session_state.calculate:
         legend=dict(title="Traffic Source"),
         plot_bgcolor="white",
         yaxis_gridcolor="lightgray",
-        margin=dict(t=30)
+        margin=dict(t=25)
     )
     
     st.plotly_chart(fig, use_container_width=True)    
@@ -622,7 +622,7 @@ if st.session_state.calculate:
             dtick='M2'# Optional: rotates labels for better readability
         ),
         yaxis=dict(tickformat="$,.2f"),
-        margin=dict(t=30)
+        margin=dict(t=25)
     )
     st.plotly_chart(fig, use_container_width=True)
     
@@ -646,7 +646,7 @@ if st.session_state.calculate:
         hovermode="x unified",
         legend=dict(title=""),
         yaxis=dict(gridcolor="lightgray"),
-        margin=dict(t=30)
+        margin=dict(t=25)
     )
     st.plotly_chart(fig, use_container_width=True)
 
