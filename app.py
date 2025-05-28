@@ -553,7 +553,9 @@ if st.session_state.calculate:
         yaxis_title="Traffic Volume",
         xaxis=dict(
             type='date',
-            tickformat='%b-%Y',  # This formats as "Jan-2027"
+            tickformat='%b-%Y', 
+            tickmode='auto',
+            nticks=36,
             tickangle=-45  # Optional: rotates labels for better readability
         ),
         yaxis=dict(tickformat=","),
@@ -612,7 +614,9 @@ if st.session_state.calculate:
         yaxis_title="MRR",
         xaxis=dict(
             type='date',
-            tickformat='%b-%Y',  # This formats as "Jan-2027"
+            tickformat='%b-%Y',
+            tickmode='auto',
+            nticks=36,
             tickangle=-45  # Optional: rotates labels for better readability
         ),
         yaxis=dict(tickformat="$,.2f")
