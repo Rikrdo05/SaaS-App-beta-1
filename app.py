@@ -527,7 +527,7 @@ if st.session_state.calculate:
         x=df_traffic["Month"],
         y=df_traffic["SEM - Paid Traffic"],
         mode='lines',
-        name='SEM Traffic',
+        name='Paid(SEM)<br>Traffic',
         line=dict(color='#1f77b4', width=2),
         hovertemplate='SEM: %{y:,.0f}<extra></extra>'
     ))
@@ -535,7 +535,7 @@ if st.session_state.calculate:
         x=df_traffic["Month"],
         y=df_traffic["SEO - Organic Traffic"],
         mode='lines',
-        name='SEO Traffic',
+        name='Organic(SEO)<br>Traffic',
         line=dict(color='#ff7f0e', width=2),
         hovertemplate='SEO: %{y:,.0f}<extra></extra>'
     ))
@@ -543,7 +543,7 @@ if st.session_state.calculate:
         x=df_traffic["Month"],
         y=df_traffic["AM - Paid Traffic"],
         mode='lines',
-        name='Affiliate Marketing',
+        name='Affiliate<br>Marketing',
         line=dict(color='#2ca02c', width=2),
         hovertemplate='Affiliate: %{y:,.0f}<extra></extra>'
     ))
@@ -605,7 +605,7 @@ if st.session_state.calculate:
         x=df_rev_split["Month"],
         y=df_rev_split["Ad Affiliate Revenue"],
         mode='lines',
-        name='Ad Affiliate Marketing',
+        name='Ad Affiliate<br>Marketing',
         stackgroup='one',
         hovertemplate='Ad Affiliate: $%{y:,.2f}<extra></extra>'
     ))
