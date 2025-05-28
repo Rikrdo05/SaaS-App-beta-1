@@ -64,10 +64,9 @@ with st.form("single_page_form", clear_on_submit=False):
     
     # Growth Rates Section
     st.subheader("Web/App Traffic Monthly Growth Rates by Year")
-    
+    st.write("Note: a 1% monthly growth rate is approximately equivalent to 12% annual growth rate")
     # SEM Growth Rates
     st.markdown("**Web/App Paid Traffic (SEM Traffic) Monthly Growth Rate by Year**")
-    st.write("Note: a 1% monthly growth rate is approximately equivalent to 12% annual growth rate")
     _cols = st.columns(5)
     with _cols[0]:
         st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
@@ -82,7 +81,6 @@ with st.form("single_page_form", clear_on_submit=False):
     
     # SEO Growth Rates
     st.markdown("**Web/App Organic Traffic (SEO Traffic) Monthly Growth Rate by Year**")
-    st.write("Note: a 1% monthly growth rate is approximately equivalent to 12% annual growth rate")
     seo_cols = st.columns(5)
     with seo_cols[0]:
         st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y1") / 100
@@ -97,7 +95,6 @@ with st.form("single_page_form", clear_on_submit=False):
     
     # Affiliate Marketing Growth Rates
     st.markdown("**Web/App Affiliate Marketing Traffic Monthly Growth Rate by Year**")
-    st.write("Note: a 1% monthly growth rate is approximately equivalent to 12% annual growth rate")
     am_cols = st.columns(5)
     with am_cols[0]:
         st.session_state.form_data['am_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y1") / 100
