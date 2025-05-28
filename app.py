@@ -513,6 +513,54 @@ if st.session_state.calculate:
     # Show charts
     st.title("📈 Financial Projections Results")
 
+    # Traffic Sources Chart
+    st.subheader("Monthly Traffic Sources")
+    df_traffic = df[[
+        'Month',
+        'SEM - Paid Traffic',
+        'SEO - Organic Traffic',
+        'AM - Paid Traffic'
+    ]]
+    
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df_traffic["Month"],
+        y=df_traffic["SEM - Paid Traffic"],
+        mode='lines',
+        name='SEM Traffic',
+        line=dict(color='#1f77b4', width=2),
+        hovertemplate='SEM: %{y:,.0f}<extra></extra>'
+    ))
+    fig.add_trace(go.Scatter(
+        x=df_traffic["Month"],
+        y=df_traffic["SEO - Organic Traffic"],
+        mode='lines',
+        name='SEO Traffic',
+        line=dict(color='#ff7f0e', width=2),
+        hovertemplate='SEO: %{y:,.0f}<extra></extra>'
+    ))
+    fig.add_trace(go.Scatter(
+        x=df_traffic["Month"],
+        y=df_traffic["AM - Paid Traffic"],
+        mode='lines',
+        name='Affiliate Marketing',
+        line=dict(color='#2ca02c', width=2),
+        hovertemplate='Affiliate: %{y:,.0f}<extra></extra>'
+    ))
+    
+    fig.update_layout(
+        xaxis_title="Month",
+        yaxis_title="Traffic Volume",
+        xaxis=dict(type='category'),
+        yaxis=dict(tickformat=","),
+        hovermode="x unified",
+        legend=dict(title="Traffic Source"),
+        plot_bgcolor="white",
+        yaxis_gridcolor="lightgray"
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)    
+    
     # Revenue split chart
     st.subheader("Monthly Recurring Revenue MRR Split")
     df_rev_split = df[[
