@@ -69,43 +69,43 @@ with st.form("single_page_form", clear_on_submit=False):
     st.markdown("**Web/App Paid Traffic (SEM Traffic) Monthly Growth Rate by Year**")
     _cols = st.columns(5)
     with _cols[0]:
-        st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Monthly Growth rate<br>Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
+        st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Monthly Growth Rate Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
     with _cols[1]:
-        st.session_state.form_data['sem_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="_y2") / 100
+        st.session_state.form_data['sem_traffic_gr_y2'] = st.number_input("Monthly Growth Rate  Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="_y2") / 100
     with _cols[2]:
-        st.session_state.form_data['sem_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y3") / 100
+        st.session_state.form_data['sem_traffic_gr_y3'] = st.number_input("Monthly Growth Rate Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y3") / 100
     with _cols[3]:
-        st.session_state.form_data['sem_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y4") / 100
+        st.session_state.form_data['sem_traffic_gr_y4'] = st.number_input("Monthly Growth Rate Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y4") / 100
     with _cols[4]:
-        st.session_state.form_data['sem_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y5") / 100
+        st.session_state.form_data['sem_traffic_gr_y5'] = st.number_input("Monthly Growth Rate Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="sem_y5") / 100
     
     # SEO Growth Rates
     st.markdown("**Web/App Organic Traffic (SEO Traffic) Monthly Growth Rate by Year**")
     seo_cols = st.columns(5)
     with seo_cols[0]:
-        st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y1") / 100
+        st.session_state.form_data['seo_traffic_gr_y1'] = st.number_input("Monthly Growth Rate Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y1") / 100
     with seo_cols[1]:
-        st.session_state.form_data['seo_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y2") / 100
+        st.session_state.form_data['seo_traffic_gr_y2'] = st.number_input("Monthly Growth Rate Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y2") / 100
     with seo_cols[2]:
-        st.session_state.form_data['seo_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y3") / 100
+        st.session_state.form_data['seo_traffic_gr_y3'] = st.number_input("Monthly Growth Rate Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y3") / 100
     with seo_cols[3]:
-        st.session_state.form_data['seo_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y4") / 100
+        st.session_state.form_data['seo_traffic_gr_y4'] = st.number_input("Monthly Growth Rate Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y4") / 100
     with seo_cols[4]:
-        st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y5") / 100
+        st.session_state.form_data['seo_traffic_gr_y5'] = st.number_input("Monthly Growth Rate Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="seo_y5") / 100
     
     # Affiliate Marketing Growth Rates
     st.markdown("**Web/App Affiliate Marketing Traffic Monthly Growth Rate by Year**")
     am_cols = st.columns(5)
     with am_cols[0]:
-        st.session_state.form_data['am_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y1") / 100
+        st.session_state.form_data['am_traffic_gr_y1'] = st.number_input("Monthly Growth Rate Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y1") / 100
     with am_cols[1]:
-        st.session_state.form_data['am_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y2") / 100
+        st.session_state.form_data['am_traffic_gr_y2'] = st.number_input("Monthly Growth Rate Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y2") / 100
     with am_cols[2]:
-        st.session_state.form_data['am_traffic_gr_y3'] = st.number_input("Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y3") / 100
+        st.session_state.form_data['am_traffic_gr_y3'] = st.number_input("Monthly Growth Rate Year 3 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y3") / 100
     with am_cols[3]:
-        st.session_state.form_data['am_traffic_gr_y4'] = st.number_input("Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y4") / 100
+        st.session_state.form_data['am_traffic_gr_y4'] = st.number_input("Monthly Growth Rate Year 4 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y4") / 100
     with am_cols[4]:
-        st.session_state.form_data['am_traffic_gr_y5'] = st.number_input("Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y5") / 100
+        st.session_state.form_data['am_traffic_gr_y5'] = st.number_input("Monthly Growth Rate Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y5") / 100
     
     # Conversion Rates Section
     st.subheader("Conversion Rate Assumptions (Traffic-to-Trial Rate %)")
