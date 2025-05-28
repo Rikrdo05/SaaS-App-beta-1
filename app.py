@@ -64,7 +64,7 @@ with st.form("single_page_form", clear_on_submit=False):
     
     # Growth Rates Section
     st.subheader("Web/App Traffic Monthly Growth Rates by Year")
-    st.write("Note: a 1% monthly growth rate is approximately equivalent to 12% annual growth rate")
+    st.write("Note: A 1% monthly growth rate is approximately equivalent to 12% annual growth rate")
     # SEM Growth Rates
     st.markdown("**Web/App Paid Traffic (SEM Traffic) Monthly Growth Rate by Year**")
     _cols = st.columns(5)
