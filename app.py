@@ -562,7 +562,8 @@ if st.session_state.calculate:
         hovermode="x unified",
         legend=dict(title="Traffic Source"),
         plot_bgcolor="white",
-        yaxis_gridcolor="lightgray"
+        yaxis_gridcolor="lightgray",
+        margin=dict(t=30)
     )
     
     st.plotly_chart(fig, use_container_width=True)    
@@ -620,7 +621,8 @@ if st.session_state.calculate:
             tickangle=-45,
             dtick='M2'# Optional: rotates labels for better readability
         ),
-        yaxis=dict(tickformat="$,.2f")
+        yaxis=dict(tickformat="$,.2f"),
+        margin=dict(t=30)
     )
     st.plotly_chart(fig, use_container_width=True)
     
@@ -643,7 +645,8 @@ if st.session_state.calculate:
         plot_bgcolor="white",
         hovermode="x unified",
         legend=dict(title=""),
-        yaxis=dict(gridcolor="lightgray")
+        yaxis=dict(gridcolor="lightgray"),
+        margin=dict(t=30)
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -670,7 +673,8 @@ if st.session_state.calculate:
         yaxis_title="Cash Flow Accumulation",
         bargap=0.3,
         plot_bgcolor="white",
-        yaxis_gridcolor="lightgray"
+        yaxis_gridcolor="lightgray",
+        margin=dict(t=30)
     )
     st.plotly_chart(fig, use_container_width=True)
 
