@@ -682,12 +682,12 @@ if st.session_state.calculate:
         "Metric": [
             "Average Monthly Renewal Rate (%)",
             "User Subscription Life Time Value - LTV ($)",
-            "SEM Return of Investment - ROI ($)",
-            "SEM ROI (%)",
-            "Affiliate Marketing ROI ($)",
-            "Affiliate Marketing ROI (%)",
+            "SEM Paid Customer Acquisition Cost Return of Investment - ROI ($)",
+            "SEM Paid Customer Acquisition Cost Return of Investment - ROI (%)",
+            "Affiliate Marketing Customer Acquisition Cost ROI ($)",
+            "Affiliate Marketing Customer Acquisition Cost ROI (%)",
             "Time to Recover SEM Customer Acquisition Cost - CAC (months)",
-            "Time to Recover Affiliate Marketing CAC (months)"
+            "Time to Recover Affiliate Marketing Cust Acq Cost - CAC (months)"
         ],
         "Value": [
             f"{renewal_rate:.1%}",
