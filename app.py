@@ -69,7 +69,7 @@ with st.form("single_page_form", clear_on_submit=False):
     st.markdown("**Web/App Paid Traffic (SEM Traffic) Monthly Growth Rate by Year**")
     _cols = st.columns(5)
     with _cols[0]:
-        st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
+        st.session_state.form_data['sem_traffic_gr_y1'] = st.number_input("Monthly Growth rate<br>Year 1 (%)", 0.0, 100.0, 2.0, 0.5, key="_y1") / 100
     with _cols[1]:
         st.session_state.form_data['sem_traffic_gr_y2'] = st.number_input("Year 2 (%)", 0.0, 100.0, 2.0, 0.5, key="_y2") / 100
     with _cols[2]:
