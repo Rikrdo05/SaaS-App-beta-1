@@ -551,7 +551,11 @@ if st.session_state.calculate:
     fig.update_layout(
         xaxis_title="Month",
         yaxis_title="Traffic Volume",
-        xaxis=dict(type='category'),
+        xaxis=dict(
+            type='date',
+            tickformat='%b-%Y',  # This formats as "Jan-2027"
+            tickangle=-45  # Optional: rotates labels for better readability
+        ),
         yaxis=dict(tickformat=","),
         hovermode="x unified",
         legend=dict(title="Traffic Source"),
@@ -606,7 +610,11 @@ if st.session_state.calculate:
     fig.update_layout(
         xaxis_title="Month",
         yaxis_title="MRR",
-        xaxis=dict(type='category'),
+        xaxis=dict(
+            type='date',
+            tickformat='%b-%Y',  # This formats as "Jan-2027"
+            tickangle=-45  # Optional: rotates labels for better readability
+        ),
         yaxis=dict(tickformat="$,.2f")
     )
     st.plotly_chart(fig, use_container_width=True)
