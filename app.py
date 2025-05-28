@@ -514,7 +514,7 @@ if st.session_state.calculate:
     st.title("📈 Financial Projections Results")
 
     # Traffic Sources Chart
-    st.subheader("Monthly Traffic Sources")
+    st.subheader("Web/App Monthly Traffic")
     df_traffic = df[[
         'Month',
         'SEM - Paid Traffic',
