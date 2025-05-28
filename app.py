@@ -617,7 +617,8 @@ if st.session_state.calculate:
             tickformat='%b-%Y',
             tickmode='auto',
             nticks=30,
-            tickangle=-45  # Optional: rotates labels for better readability
+            tickangle=-45,
+            dtick='M2'# Optional: rotates labels for better readability
         ),
         yaxis=dict(tickformat="$,.2f")
     )
