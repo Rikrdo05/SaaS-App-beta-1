@@ -783,12 +783,12 @@ if st.session_state.calculate:
     
     if affiliate_cpa > 0 and LTV < affiliate_cpa:
         st.warning("⚠️ **Warning:** Your Affiliate CAC ($" + f"{affiliate_cpa:,.2f}) "  
-                  f"exceeds Customer LTV (${LTV:,.2f}). You'll **lose money per customer**.")
+                  f"exceeds Customer LTV (${LTV:,.2f}). You'll **lose money on every customer acquired through Affiliate Marketing channel**.")
         # Still allow calculations, but warn the user
 
     # Validation 3: CAC > LTV → Warning (unprofitable)
     if sem_cpa > 0 and LTV < sem_cpa:
         st.warning("⚠️ **Warning:** Your SEM CAC ($" + f"{sem_cpa:,.2f}) "  
-                  f"exceeds Customer LTV (${LTV:,.2f}). You'll **lose money per customer**.")
+                  f"exceeds Customer LTV (${LTV:,.2f}). You'll **lose money on every customer acquired through SEM channel**.")
         # Still allow calculations, but warn the user
 
