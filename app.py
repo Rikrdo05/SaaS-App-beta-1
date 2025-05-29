@@ -680,7 +680,7 @@ if st.session_state.calculate:
     st.plotly_chart(fig, use_container_width=True)
     
     # Financial performance by year chart
-    st.subheader("Financial Performance by Year (Income Statement)")
+    st.subheader("Financial Performance (Annual Income Statement Output)")
     
     fig = go.Figure()
     colors = ['#006400','#2E8B57','#3CB371','#90EE90']
