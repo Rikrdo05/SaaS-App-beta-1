@@ -46,6 +46,7 @@ with st.form("single_page_form", clear_on_submit=False):
         
     
     # Traffic Inputs
+    st.markdown("")
     st.subheader("Web/App Traffic Parameters")
     traffic_col1, traffic_col2, traffic_col3 = st.columns(3)
     
@@ -63,6 +64,7 @@ with st.form("single_page_form", clear_on_submit=False):
             value=10000, step=1000, format="%d")    
     
     # Growth Rates Section
+    st.markdown("")
     st.subheader("Web/App Traffic Monthly Growth Rates by Year")
     st.write("Note: A 1% monthly growth rate is approximately equivalent to 12% annual growth rate")
     # SEM Growth Rates
@@ -108,6 +110,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['am_traffic_gr_y5'] = st.number_input("Monthly Growth Rate - Year 5 (%)", 0.0, 100.0, 2.0, 0.5, key="am_y5") / 100
     
     # Conversion Rates Section
+    st.markdown("")
     st.subheader("Conversion Rate Assumptions (Traffic-to-Trial Rate %)")
     
     # SEM Conversion Rates
@@ -155,6 +158,7 @@ with st.form("single_page_form", clear_on_submit=False):
     
 
     # Cost Assumptions Section
+    st.markdown("")
     st.subheader("Cost Assumptions")
     cost_col1, cost_col2 = st.columns(2)
     
@@ -171,6 +175,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['monthly_labor_cost'] = st.number_input("Monthly Labor Cost ($)", min_value=0, value=10000, step=1000)
 
     # Other Revenue Sources
+    st.markdown("")
     st.subheader("Other Revenue - Ad Network (e.g, Google AdSense)")
     st.write("Set the below values to 0.00 if Ad Network is not part of your revenue model")
     AdNet_col1, AdNet_col2 = st.columns(2)
@@ -183,6 +188,7 @@ with st.form("single_page_form", clear_on_submit=False):
         
 
     # Other Revenue Sources
+    st.markdown("")
     st.subheader("Other Revenue - Affiliate Marketing (Promoting an specific merchant/Website/App)")
     st.write("Set the below values to 0.00 if you are not promoting any third party merchant/website/App")
     AdAF_col1, AdAF_col2 = st.columns(2)
