@@ -739,8 +739,10 @@ if st.session_state.calculate:
         "Metric": [
             "Average Monthly Renewal Rate (%)",
             "User Subscription Life Time Value - LTV ($)",
+            "SEM Paid Customer Acquisition Cost - CAC ($)",
             "SEM Paid Customer Acquisition Cost Return of Investment - ROI ($)",
             "SEM Paid Customer Acquisition Cost Return of Investment - ROI (%)",
+            "Affiliate Marketing Customer Acquisition Cost -CAC ($)",
             "Affiliate Marketing Customer Acquisition Cost ROI ($)",
             "Affiliate Marketing Customer Acquisition Cost ROI (%)",
             "Time to Recover SEM Customer Acquisition Cost - CAC (months)",
@@ -749,8 +751,10 @@ if st.session_state.calculate:
         "Value": [
             f"{renewal_rate:.1%}",
             f"${LTV:,.2f}",
+            f"${sem_cpa:,.2f}",
             f"${sem_roi:,.2f}" if sem_roi_percent is not None else "N/A. You input SEM CAC = 0.00",
             f"{sem_roi_percent:.2%}" if sem_roi_percent is not None else "N/A. You input SEM CAC = 0.00",
+            f"${affiliate_cpa:,.2f}",
             f"${affiliate_marketing_roi:,.2f}" if affiliate_marketing_roi_percent is not None else "N/A. You input Affiliate Marketing CAC = 0.00",
             f"{affiliate_marketing_roi_percent:.2%}" if affiliate_marketing_roi_percent is not None else "N/A. You input Affiliate Marketing CAC = 0.00",
             "N/A. You input SEM CAC = 0.00" if sem_roi_percent is None else "Immediately" if time_to_recover_sem_cac == 0.0 else "Not Profitable" if time_to_recover_sem_cac>1200 else f"{time_to_recover_sem_cac:,.2f}",
