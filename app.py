@@ -111,7 +111,7 @@ with st.form("single_page_form", clear_on_submit=False):
     
     # Conversion Rates Section
     st.markdown("")
-    st.subheader("Conversion Rate Assumptions (Traffic-to-Trial Rate %)")
+    st.subheader("Conversion Rate Assumptions (Traffic-to-Subscription Trial Rate %)")
     
     # SEM Conversion Rates
     st.markdown("**Paid Traffic (SEM Traffic) Conversion Rates**")
