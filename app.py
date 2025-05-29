@@ -21,7 +21,7 @@ st.title("📊 SaaS Financial Model")
 
 with st.form("single_page_form", clear_on_submit=False):
     # Core Parameters - Column 1
-    st.subheader("Core Parameters")
+    st.subheader("Revenue Model Core Parameters")
     col1, col2 = st.columns(2)
     
     with col1:
