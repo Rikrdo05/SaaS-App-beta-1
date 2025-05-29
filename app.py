@@ -184,7 +184,7 @@ with st.form("single_page_form", clear_on_submit=False):
         st.session_state.form_data['views per visit'] = st.number_input("Page Views Per Visit", min_value=0.0, value=0.0, step=0.5, format="%.2f")
         
     with AdNet_col2:
-        st.session_state.form_data['cpm'] = st.number_input("Revenue Per Mile/1,000 Impressions - RPM Revenue ($)", min_value=0.0, value=5.0, step=0.5, format="%.2f")
+        st.session_state.form_data['cpm'] = st.number_input("Revenue Per Mile/1,000 Impressions - RPM ($)", min_value=0.0, value=5.0, step=0.5, format="%.2f")
         
 
     # Other Revenue Sources
