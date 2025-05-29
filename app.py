@@ -704,7 +704,7 @@ if st.session_state.calculate:
     st.plotly_chart(fig, use_container_width=True)
 
     # Cashflow accumulation chart
-    st.subheader("Cash Flow Accumulation by Year")
+    st.subheader("Cash Flow Accumulation Over The Years")
     df_cashflow = df_financials.groupby("Year", as_index=False)["Earnings Before Taxes"].sum()
     df_cashflow["Cash Flow Accumulation"] = df_cashflow["Earnings Before Taxes"].cumsum()
     fig = px.bar(
