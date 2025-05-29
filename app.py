@@ -771,4 +771,24 @@ if st.session_state.calculate:
         hide_index=True,
         use_container_width=True
     )
+    
+    
+    if sem_traffic_m1 > 0 and sem_cpa == 0:
+        st.warning("⚠️ **Warning:** You input SEM traffic but also input $0 SEM CAC, SEM traffic always has SEM CAC.")
+    
+    if am_traffic_m1 > 0 and affiliate_cpa == 0:
+        st.error("⚠️ **Warning:** You input Affiliate Marketing traffic but $0 Affiliate CAC, Affiliate Marketing traffic always has Affiliate CAC.")
+  
+
+    
+    if affiliate_cpa > 0 and LTV < affiliate_cpa:
+        st.warning("⚠️ **Warning:** Your Affiliate CAC ($" + f"{affiliate_cpa:,.2f}) "  
+                  f"exceeds Customer LTV (${LTV:,.2f}). You'll **lose money per customer**.")
+        # Still allow calculations, but warn the user
+
+    # Validation 3: CAC > LTV → Warning (unprofitable)
+    if sem_cpa > 0 and LTV < sem_cpa:
+        st.warning("⚠️ **Warning:** Your SEM CAC ($" + f"{sem_cpa:,.2f}) "  
+                  f"exceeds Customer LTV (${LTV:,.2f}). You'll **lose money per customer**.")
+        # Still allow calculations, but warn the user
 
